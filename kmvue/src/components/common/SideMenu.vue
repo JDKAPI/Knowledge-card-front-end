@@ -21,7 +21,7 @@
       </el-menu-item>
       <el-menu-item index="5">
         <i class="el-icon-house"></i>
-        <span slot="title">个人信息</span>
+        <span slot="title" @click="jumptopersoninfo">个人信息</span>
       </el-menu-item>
     </el-menu>
   </el-container>
@@ -53,6 +53,9 @@
           },
           jumptoindex() {
             this.$router.replace({path: '/index'});
+          },
+          jumptopersoninfo() {
+              this.$router.replace({path:'/personinfo'});
           }
         }
     }

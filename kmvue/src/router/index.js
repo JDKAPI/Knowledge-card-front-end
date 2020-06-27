@@ -7,6 +7,7 @@ import Home from "../components/Home";
 import SideMenu from "../components/common/SideMenu";
 import Cardmanager from "../components/Cardmanager";
 import Card from "../components/cardmanager/Card";
+import Personinfo from "../components/personinfo/Personinfo";
 Vue.use(Router)
 
 export default new Router({
@@ -29,6 +30,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/personinfo',
+      name: 'Personinfo',
+      component: Personinfo
     },
     {
       path:'/cardmanager',

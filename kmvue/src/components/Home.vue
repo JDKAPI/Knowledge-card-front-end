@@ -106,7 +106,18 @@ import axios from 'axios'
         };
       },
       methods: {
+        open() {
+          this.$message('提交成功');
+        },
+          empty(){
+            this.card.dynamicTags=['标签一', '标签二', '标签三'],
+              this.card.zhongdian="",
+              this.card.content="",
+              this.card.ispublic=true;
+            this.card.headline=""
+          },
         submit(){
+            var that= this;
             axios.post('addcard',
                       {
                         creatorId:"1",
@@ -121,7 +132,8 @@ import axios from 'axios'
           )
           .then(res => console.log(res))
             .catch(error => console.log(error));
-
+             that.empty();
+             that.open();
         },
         handleClose(tag) {
           this.card.dynamicTags.splice(this.card.dynamicTags.indexOf(tag), 1);
