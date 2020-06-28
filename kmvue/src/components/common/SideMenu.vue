@@ -57,10 +57,14 @@
           },
           jumptopersoninfo() {
               this.$router.replace({path:'/personinfo'});
+<<<<<<< HEAD
           },
             jumptotimeline(){
                 this.$router.replace({path:'/timeLine'});
             }
+=======
+          }
+>>>>>>> d5df9fb5f009e6cdeee98750e0b18fce40310a09
         }
     }
 </script>
