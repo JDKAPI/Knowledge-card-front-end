@@ -43,7 +43,8 @@
                 select: '',
                 is_dot:true,
                 is_login:false,
-                avatarSrc:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                avatarSrc:"https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg",
+                userId:1
             }
         },
         methods:{
@@ -54,6 +55,7 @@
                   this.selectPlaceholder='在公有卡池搜索'
               }
             }
+
         }
     }
 </script>

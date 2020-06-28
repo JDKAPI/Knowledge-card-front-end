@@ -45,7 +45,6 @@
   import axios from 'axios'
   export default {
     name: 'Cards',
-
     data () {
       return {
         cover: 'https://i.loli.net/2019/04/10/5cada7e73d601.jpg',

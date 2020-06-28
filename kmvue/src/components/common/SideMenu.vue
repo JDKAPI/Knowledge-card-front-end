@@ -1,4 +1,5 @@
 <template>
+
 <div  class="el-menu-vertical-demo" >
   <el-container   @mouseenter.native="collapse(false)" @mouseleave.native="collapse(true)">
     <el-menu default-active="1-4-1" class="el-menu-vertical-demo"
@@ -17,11 +18,11 @@
       </el-menu-item>
       <el-menu-item index="4">
         <i class="el-icon-odometer"></i>
-        <span slot="title">时间轴</span>
+        <span slot="title"  @click="jumptotimeline">时间轴</span>
       </el-menu-item>
       <el-menu-item index="5">
         <i class="el-icon-house"></i>
-        <span slot="title">个人信息</span>
+        <span slot="title" @click="jumptopersoninfo">个人信息</span>
       </el-menu-item>
     </el-menu>
   </el-container>
@@ -53,7 +54,13 @@
           },
           jumptoindex() {
             this.$router.replace({path: '/index'});
-          }
+          },
+          jumptopersoninfo() {
+              this.$router.replace({path:'/personinfo'});
+          },
+            jumptotimeline(){
+                this.$router.replace({path:'/timeLine'});
+            }
         }
     }
 </script>
