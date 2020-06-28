@@ -14,15 +14,10 @@
             </div>
            <div class="personinfo">
              <ul style="list-style-type: none">
-<<<<<<< HEAD
                <li>账户</li>
                <li>邮箱</li>
                <li>性别</li>
                <el-button>dianji</el-button>
-=======
-               <li class="ali">姓名  {{person.name}}</li>
-               <li class="ali">关注次数  {{person.noticeNum}}</li>
->>>>>>> d5df9fb5f009e6cdeee98750e0b18fce40310a09
              </ul>
            </div>
           </div>
@@ -42,7 +37,6 @@
         return {
           person: {
             id: "001",
-<<<<<<< HEAD
           }
         }
       },
@@ -52,25 +46,6 @@
            params:{userId:1}
          }).then(function (res) {
               console.log(res);
-=======
-            name:"",
-            imgsrc:'',
-            noticeNum:'',
-          }
-        }
-      },
-      mounted() {
-        this.getinfo();
-      },
-      methods:{
-        getinfo(){
-          var that = this;
-         axios.get('personPage',{
-           params:{userId:1},headers:{}
-         }).then(function (res) {
-              console.log(res);
-              that.person=res.data.peronPageInfo;
->>>>>>> d5df9fb5f009e6cdeee98750e0b18fce40310a09
          }).catch(function (error) {
               console.log(error);
          })
@@ -104,18 +79,9 @@
     left: 320px;
     top: 220px;
   }
-<<<<<<< HEAD
   li{
     font-size: 20px;
     margin-top: 20px;
-=======
-  .ali{
-    width: 1200px;
-    text-align: left;
-    font-size: 20px;
-    margin-top: 30px;
-    border-bottom: 1px solid #999999;
->>>>>>> d5df9fb5f009e6cdeee98750e0b18fce40310a09
   }
 </style>
 <style scoped>

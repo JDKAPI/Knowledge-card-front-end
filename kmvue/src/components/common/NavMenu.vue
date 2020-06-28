@@ -49,15 +49,10 @@
               }else {
                   this.selectPlaceholder='在公有卡池搜索'
               }
-<<<<<<< HEAD
-            }
-
-=======
             },
           jumptonotice(){
               this.$router.replace({path:'/notice'});
           },
->>>>>>> d5df9fb5f009e6cdeee98750e0b18fce40310a09
         }
     }
 </script>
