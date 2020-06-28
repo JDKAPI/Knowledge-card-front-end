@@ -25,8 +25,9 @@
                       <el-col :span="3">
                         <i class="el-icon-edit icon-size" ></i>
                         <i class="iconfont icon-like icon-size" >
-                          <span v-text="activity.likeNum" style="font-size: 11px;" ></span>
+                          <span v-text="activity.likeNum"  style="font-size: 11px;" ></span>
                         </i>
+
                         <i class="el-icon-delete icon-size" @click="delcard(activity)"></i>
                       </el-col>
                       <el-col :span="4" :offset="15" >

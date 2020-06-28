@@ -10,6 +10,7 @@ import Card from "../components/cardmanager/Card";
 import Personinfo from "../components/personinfo/Personinfo";
 import TimeLine from "../components/timeLine/TimeLine";
 import Notice from "../components/notice/Notice";
+import cardDetail from "../components/cardDetail/cardDetail";
 Vue.use(Router)
 
 export default new Router({
@@ -59,6 +60,11 @@ export default new Router({
       path: '/timeLine',
       name: 'TimeLine',
       component: TimeLine
+    },
+    {
+      path: '/cardDetail',
+      name: 'CrdDetail',
+      component: cardDetail
     },
   ]
 })
