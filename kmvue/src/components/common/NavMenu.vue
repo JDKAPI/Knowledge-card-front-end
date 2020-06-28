@@ -15,18 +15,14 @@
           </el-input>
         </el-col>
         <el-col :span="2" :offset="12">
-          <el-badge :is-dot="is_dot" style="float: left" class="item" >
-            <el-button icon="el-icon-message-solid" class="item-noti"></el-button>
+          <el-badge :is-dot="is_dot"style="float: left" class="item">
+            <el-button icon="el-icon-message-solid" class="item-noti" @click="jumptonotice"></el-button>
           </el-badge>
-          <el-button v-if="is_login" class="item" style="float: left">登录</el-button>
+          <el-button v-if="is_login" class="item" style="float: left" >登录</el-button>
             <el-avatar v-else class="item" :src="avatarSrc"></el-avatar>
-
         </el-col>
       </el-row>
     </el-header>
-
-
-
   </div>
 </template>
 
@@ -36,12 +32,11 @@
         data() {
             return {
                 selectPlaceholder:'请选择卡池，默认私有卡池',
-
                 input1: '',
                 input2: '',
                 input3: '',
                 select: '',
-                is_dot:true,
+                is_dot:false,
                 is_login:false,
                 avatarSrc:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
             }
@@ -53,7 +48,10 @@
               }else {
                   this.selectPlaceholder='在公有卡池搜索'
               }
-            }
+            },
+          jumptonotice(){
+              this.$router.replace({path:'/notice'});
+          },
         }
     }
 </script>

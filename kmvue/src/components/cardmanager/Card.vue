@@ -3,7 +3,7 @@
     <el-row style="height: 840px;">
       <el-tooltip effect="dark" placement="right"
                   v-for="item in cards"
-                  :key="item.id">
+                  :key="item.id" v-if="item.id!=0">
         <p slot="content" style="width: 300px" class="abstract">{{"上次复习时间："+item.id}}</p>
         <p slot="content" style="font-size: 13px;margin-bottom: 6px">
           <span>{{"卡片创建时间："+item.gmtCreate}}</span>
@@ -50,15 +50,15 @@
         cover: 'https://i.loli.net/2019/04/10/5cada7e73d601.jpg',
         cards: [
           {
-            id:"1",
-            cardId:"2",
-            reviewTime:"3",
-            gmtCreate:"4",
-            gmtModified:"5",
-            reviewNum:"6",
-            userId:"7",
-            cardName: "8",
-            creatorId:"id"
+            id:'',
+            cardId:'',
+            reviewTime:'',
+            gmtCreate:'',
+            gmtModified:'',
+            reviewNum:'',
+            userId:'',
+            cardName: '',
+            creatorId:''
           }
         ],
         showPrevious: false,
@@ -76,6 +76,9 @@
       this.init();
   },
     methods:{
+      open() {
+        alert("删除成功");
+      },
       init() {
         var that = this;
        axios.get('getcardlist',{
@@ -89,6 +92,7 @@
        .catch(error=>console.log(error));
       },
       delcard(item){
+        var that  = this;
         axios.get('delcard',{
          params:{
            userId:item.userId,
@@ -97,7 +101,8 @@
          }
         },{})
       .then(function () {
-       window.location.reload();
+        window.location.reload();
+        that.open();
       })
           .catch(error=>console.log(error));
       }
