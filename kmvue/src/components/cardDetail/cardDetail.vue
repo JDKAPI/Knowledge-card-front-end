@@ -10,8 +10,8 @@
         </div>
         <div>
         <ul class="menu">
-          <li v-text="card.CreatorName" class="tou"></li>
-          <li  class="tou">{{gmtCreate |formatDate}}</li>
+          <li v-text="card.creatorName" class="tou"></li>
+          <li  class="tou">{{card.gmtModified|formatDate}}</li>
         </ul>
         </div>
         <el-row>
@@ -21,20 +21,20 @@
               <div>
                   <span v-text="card.cardDescription"></span>
                 <el-divider></el-divider>
-                  <span v-text="card.cardContent"></span>
+                  <span v-text="card.cardText"></span>
                 <el-divider><i class="el-icon-sunny"></i></el-divider>
                 <el-image v-for="item in card.imageSrc" :src="item">
                 </el-image>
               </div>
               <div>
                 <el-row>
-                  <el-badge :value="commentNum" :max="99" class="badgeItem">
+                  <el-badge :value="card.commentNum" :max="99" class="badgeItem">
                   <el-button type="success" icon="el-icon-s-comment" circle></el-button>
                   </el-badge>
-                  <el-badge :value="collectNum" :max="99" class="badgeItem">
-                  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+                  <el-badge :value="card.collectNum" :max="99" class="badgeItem">
+                  <el-button type="warning" icon="el-icon-star-off" circle @click="upCollect"></el-button>
                   </el-badge>
-                  <el-badge :value="likeNum" :max="99" class="badgeItem">
+                  <el-badge :value="card.likeNum" :max="99" class="badgeItem">
                     <el-button type="danger" icon="iconfont icon-like icon-size" circle @click="upLikeNum"></el-button>
                   </el-badge>
 
@@ -64,7 +64,7 @@
                 card: {
                     cardTitle: 'Django 简介',
                     cardDescription: "Django 是一个由 Python 编写的一个开放源代码的 Web 应用框架。",
-                    cardContent: "使用 Django，只要很少的代码，Python 的程序开发人员就可以轻松地完成一个正式网站所需要" +
+                    cardText: "使用 Django，只要很少的代码，Python 的程序开发人员就可以轻松地完成一个正式网站所需要" +
                         "的大部分内容，并进一步开发出全功能的 Web 服务 Django 本身基于 MV" +
                         "C 模型，即 Model（模型）+ View（视图）" +
                         "+ Controller（控制器）设计模式，MVC 模式使后续对程序的修改和扩展简化，并且" +
@@ -72,14 +72,14 @@
                     imageSrc: ["https://www.runoob.com/wp-content/uploads/2020/05/1589777036-2760-fs1oSv4dOWAwC5yW.png",
                         "https://www.runoob.com/wp-content/uploads/2020/05/MTV-Diagram.png"
                     ],
-                    cardLabel: ['标签一', '标签二', '标签三'],
+                    labelName: ['标签一', '标签二', '标签三'],
                     creatorAvatarSrc: "https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg",
-                    CreatorName: "小明",
+                    creatorName: "小明",
+                    gmtModified: 1593261633875,
+                    likeNum: 11,
+                    commentNum:11,
+                    collectNum:11
                 } ,
-                gmtCreate: 1593261633875,
-                likeNum: 11,
-                commentNum:11,
-                collectNum:11
             }
         },
         mounted() {
@@ -95,13 +95,9 @@
                     headers: {}
                 }).then(
                     function (res) {
-                        console.log(res);
                         that.card = res.data;
+                        console.log(that.card);
                         that.creatorAvatarSrc = NavMenu.data().avatarSrc;
-                        that.likeNum=33;
-                        that.commentNum=11;
-                        that.collectNum=11;
-                        that.gmtCreate=1593261633875;
                     }
                 )
                     .catch(error => console.log(error));
@@ -114,13 +110,32 @@
                     headers: {}
                 }).then(
                     function (res) {
-                        console.log(res);
                         var num=res.data.likeNum;
-                        console.log(res.data.likeNum);
                         if(num!==-1){
-                            that.likeNum+=1;
+                            that.card.likeNum+=1;
                         }else {
-                            that.likeNum-=1;
+                            that.card.likeNum-=1;
+                        }
+                    }
+                )
+                    .catch(error => console.log(error));
+            },
+            upCollect(){
+                var that=this;
+                var cardId = this.$route.query.cardId;
+                axios.get('upCollect', {
+                    params: {userId: NavMenu.data().userId,cardId:cardId},
+                    headers: {}
+                }).then(
+                    function (res) {
+                        var num=res.data.collectNum;
+                        console.log(res.data.collectNum);
+                        if(num==0){
+                          alert("您是卡片创造者，无需收藏");
+                        } else if(num!==-1){
+                            that.card.collectNum+=1;
+                        }else {
+                            that.card.collectNum-=1;
                         }
                     }
                 )
