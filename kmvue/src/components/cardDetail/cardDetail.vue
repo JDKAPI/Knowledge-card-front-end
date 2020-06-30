@@ -6,12 +6,12 @@
       <el-main>
         <link rel="stylesheet" href="//at.alicdn.com/t/font_1907822_2kqvxepkjap.css">
         <div>
-          <span v-text="card.title" style="font-size: 60px"></span>
+          <span v-text="card.cardTitle" style="font-size: 60px;"></span>
         </div>
         <div>
         <ul class="menu">
-          <li v-text="card.creatorName" class="tou"></li>
-          <li v-text="card.gmtCreate" class="tou"></li>
+          <li v-text="card.CreatorName" class="tou"></li>
+          <li  class="tou">{{gmtCreate |formatDate}}</li>
         </ul>
         </div>
         <el-row>
@@ -21,18 +21,23 @@
               <div>
                   <span v-text="card.cardDescription"></span>
                 <el-divider></el-divider>
-                  <span v-text="card.cardText"></span>
+                  <span v-text="card.cardContent"></span>
                 <el-divider><i class="el-icon-sunny"></i></el-divider>
                 <el-image v-for="item in card.imageSrc" :src="item">
                 </el-image>
               </div>
               <div>
                 <el-row>
-                  <el-button icon="el-icon-search" circle></el-button>
-                  <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                  <el-badge :value="commentNum" :max="99" class="badgeItem">
                   <el-button type="success" icon="el-icon-s-comment" circle></el-button>
+                  </el-badge>
+                  <el-badge :value="collectNum" :max="99" class="badgeItem">
                   <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-                  <el-button type="danger" icon="iconfont icon-like icon-size" circle></el-button>
+                  </el-badge>
+                  <el-badge :value="likeNum" :max="99" class="badgeItem">
+                    <el-button type="danger" icon="iconfont icon-like icon-size" circle @click="upLikeNum"></el-button>
+                  </el-badge>
+
                 </el-row>
 
               </div>
@@ -54,13 +59,12 @@
     export default {
         name: "cardDetail",
         components: {SideMenu, NavMenu},
-        data(){
-            return{
+        data() {
+            return {
                 card: {
-                    title: 'Django 简介',
-                    gmtCreate: "2019.1.1",
+                    cardTitle: 'Django 简介',
                     cardDescription: "Django 是一个由 Python 编写的一个开放源代码的 Web 应用框架。",
-                    cardText: "使用 Django，只要很少的代码，Python 的程序开发人员就可以轻松地完成一个正式网站所需要" +
+                    cardContent: "使用 Django，只要很少的代码，Python 的程序开发人员就可以轻松地完成一个正式网站所需要" +
                         "的大部分内容，并进一步开发出全功能的 Web 服务 Django 本身基于 MV" +
                         "C 模型，即 Model（模型）+ View（视图）" +
                         "+ Controller（控制器）设计模式，MVC 模式使后续对程序的修改和扩展简化，并且" +
@@ -68,33 +72,83 @@
                     imageSrc: ["https://www.runoob.com/wp-content/uploads/2020/05/1589777036-2760-fs1oSv4dOWAwC5yW.png",
                         "https://www.runoob.com/wp-content/uploads/2020/05/MTV-Diagram.png"
                     ],
-                    labelName: ['标签一', '标签二', '标签三'],
+                    cardLabel: ['标签一', '标签二', '标签三'],
                     creatorAvatarSrc: "https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg",
-                    creatorName: "小明",
-                }
+                    CreatorName: "小明",
+                } ,
+                gmtCreate: 1593261633875,
+                likeNum: 11,
+                commentNum:11,
+                collectNum:11
             }
+        },
+        mounted() {
+            this.init();
+        },
+        methods: {
+            init() {
+                var cardId = this.$route.query.cardId;
+                var that = this;
+                axios.get('showcard', {
+                    params: {userId: 1,
+                    cardId:cardId},
+                    headers: {}
+                }).then(
+                    function (res) {
+                        console.log(res);
+                        that.card = res.data;
+                        that.creatorAvatarSrc = NavMenu.data().avatarSrc;
+                        that.likeNum=33;
+                        that.commentNum=11;
+                        that.collectNum=11;
+                        that.gmtCreate=1593261633875;
+                    }
+                )
+                    .catch(error => console.log(error));
+            },
+            upLikeNum(){
+                var that=this;
+                var cardId = this.$route.query.cardId;
+                axios.get('upLikeNum', {
+                    params: {userId: NavMenu.data().userId,cardId:cardId},
+                    headers: {}
+                }).then(
+                    function (res) {
+                        console.log(res);
+                        var num=res.data.likeNum;
+                        console.log(res.data.likeNum);
+                        if(num!==-1){
+                            that.likeNum+=1;
+                        }else {
+                            that.likeNum-=1;
+                        }
+                    }
+                )
+                    .catch(error => console.log(error));
+            }
+        },
+        filters: {
+            formatDate: function (value) {
+                let date = new Date(value);
+                let y = date.getFullYear();
+                let MM = date.getMonth() + 1;
+                MM = MM < 10 ? ('0' + MM) : MM;
+                let d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                let h = date.getHours();
+                h = h < 10 ? ('0' + h) : h;
+                let m = date.getMinutes();
+                m = m < 10 ? ('0' + m) : m;
+                let s = date.getSeconds();
+                s = s < 10 ? ('0' + s) : s;
+                return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s;
+            },
+        },
 
-        }
     }
 </script>
 
 <style scoped>
-  .text {
-    font-size: 14px;
-  }
-
-  .item {
-    margin-bottom: 18px;
-  }
-
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
-  }
 
   .box-card {
     width:100%;
@@ -110,5 +164,8 @@
     list-style-type: none;
     color: #a6a9ad;
   }
-
+  .badgeItem {
+    margin-top: 10px;
+    margin-right: 40px;
+  }
 </style>

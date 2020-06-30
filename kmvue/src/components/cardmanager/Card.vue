@@ -25,7 +25,9 @@
             <div style="margin-top: 15px">
               <el-button icon="el-icon-delete" circle @click="delcard(item)"></el-button>
               <el-button icon="el-icon-edit" circle></el-button>
-              <el-button icon="el-icon-view" circle></el-button>
+              <router-link :to="{path: '/cardDetail',query: {cardId: item.cardId}}">
+                <el-button icon="el-icon-view" circle type="button"></el-button>
+              </router-link>
             </div>
           </div>
         </el-card>
