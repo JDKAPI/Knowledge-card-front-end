@@ -23,7 +23,7 @@
                 <el-divider></el-divider>
                   <span v-text="card.cardText"></span>
                 <el-divider><i class="el-icon-sunny"></i></el-divider>
-                <el-image v-for="item in card.imageSrc" :src="item">
+                <el-image v-for="item in card.imageSrc" :key="item" :src="item">
                 </el-image>
               </div>
               <div>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    //import axios from 'axios'
     import NavMenu from "../common/NavMenu";
     import SideMenu from "../common/SideMenu";
     import Vue from 'vue';
@@ -69,8 +69,8 @@
                         "C 模型，即 Model（模型）+ View（视图）" +
                         "+ Controller（控制器）设计模式，MVC 模式使后续对程序的修改和扩展简化，并且" +
                         "使程序某一部分的重复利用成为可能。",
-                    imageSrc: ["https://www.runoob.com/wp-content/uploads/2020/05/1589777036-2760-fs1oSv4dOWAwC5yW.png",
-                        "https://www.runoob.com/wp-content/uploads/2020/05/MTV-Diagram.png"
+                    imageSrc: ['https://www.runoob.com/wp-content/uploads/2020/05/1589777036-2760-fs1oSv4dOWAwC5yW.png',
+                        'https://www.runoob.com/wp-content/uploads/2020/05/MTV-Diagram.png'
                     ],
                     labelName: ['标签一', '标签二', '标签三'],
                     creatorAvatarSrc: "https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg",

@@ -22,8 +22,7 @@ new Vue({
   components: { App },
   template: '<App/>'
 
-})
-//时间戳转化成格式时间
+}),
 Vue.prototype.format = function (te){
   if(te == ''){
     return '';

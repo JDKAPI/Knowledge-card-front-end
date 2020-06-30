@@ -12,14 +12,18 @@
                 auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
     <el-form-item style="width: 100%">
-      <el-button type="primary" style="width: 100%;background: #505458;border: none" v-on:click="login">登录</el-button>
+      <el-row>
+        <el-button type="primary" v-on:click="Login">登录</el-button>
+        <el-button onclick="window.location.href = 'http://localhost:8080/register'">注册</el-button>
+        <el-button >忘记密码</el-button>
+        </el-row>
     </el-form-item>
   </el-form>
   </body>
 </template>
 
 <script>
-
+import axios from 'axios'
     export default {
         name: 'Login',
         data () {
@@ -32,18 +36,21 @@
             }
         },
         methods: {
-            login () {
-                this.$axios
-                    .post('/login', {
-                        username: this.loginForm.username,
-                        password: this.loginForm.password
-                    })
-                    .then(successResponse => {
-                        if (successResponse.data.code === 200) {
-                            this.$router.replace({path: '/index'})
-                        }
-                    })
-                    .catch(failResponse => {
+
+            Login () {
+              var that = this;
+                axios.post('/login', {
+                    },{params:{
+                    userMail: this.loginForm.username,
+                    userPassword: this.loginForm.password
+                  }})
+                    .then(function (res) {
+                        that.$router.replace({path: '/index'})
+                        console.log(res);
+                      }
+                    )
+                    .catch(function (error) {
+                        console.log(error);
                     })
             }
         }
@@ -52,7 +59,7 @@
 
 <style>
   #poster {
-    background:url("../assets/eva.jpg") no-repeat;
+    background:url("../assets/two.gif") no-repeat;
     background-position: center;
     height: 100%;
     width: 100%;

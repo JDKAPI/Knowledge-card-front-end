@@ -10,8 +10,14 @@ import Card from "../components/cardmanager/Card";
 import Personinfo from "../components/personinfo/Personinfo";
 import TimeLine from "../components/timeLine/TimeLine";
 import Notice from "../components/notice/Notice";
+import Text from "../components/Text";
 import cardDetail from "../components/cardDetail/cardDetail";
+
 import CardEdit from "../components/cardEdit/CardEdit";
+
+import Reviewcard from "../components/reviewCard/Reviewcard";
+import Register from "../components/Register";
+
 Vue.use(Router)
 
 export default new Router({
@@ -36,6 +42,13 @@ export default new Router({
       component: Login
     },
     {
+
+      path: '/text',
+      name: 'Text',
+      component: Text
+    },
+    {
+
       path: '/personinfo',
       name: 'Personinfo',
       component: Personinfo
@@ -61,6 +74,16 @@ export default new Router({
       path: '/timeLine',
       name: 'TimeLine',
       component: TimeLine
+    },
+    {
+      path: '/reviewcard',
+      name: 'Reviewcard',
+      component: Reviewcard
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/cardDetail',

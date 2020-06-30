@@ -6,23 +6,23 @@
              @open="handleOpen" @close="handleClose" :collapse="isCollapse">
       <el-menu-item index="1">
         <i class="el-icon-edit-outline"></i>
-        <span slot="title" @click="jumptoindex">返回首页</span>
+        <span slot="title" ><a href="http://localhost:8080/index" style="text-decoration: none;font-size: 15px">返回首页</a></span>
       </el-menu-item>
       <el-menu-item index="2">
         <i class="el-icon-s-claim"></i>
-        <span slot="title">复习卡片</span>
+        <span slot="title"><a href="http://localhost:8080/reviewcard" style="text-decoration: none;font-size: 15px">复习卡片</a></span>
       </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-reading"></i>
-        <span slot="title" @click="jumptocardmana">知识总览</span>
+        <span slot="title" ><a href="http://localhost:8080/cardmanager" style="text-decoration: none;font-size: 15px">知识总览</a></span>
       </el-menu-item>
       <el-menu-item index="4">
         <i class="el-icon-odometer"></i>
-        <span slot="title"  @click="jumptotimeline">时间轴</span>
+        <span slot="title" ><a href="http://localhost:8080/timeLine" style="text-decoration: none;font-size: 15px">时间轴</a></span>
       </el-menu-item>
       <el-menu-item index="5">
         <i class="el-icon-house"></i>
-        <span slot="title" @click="jumptopersoninfo">个人信息</span>
+        <span slot="title" ><a href="http://localhost:8080/personinfo" style="text-decoration: none;font-size: 15px">个人信息</a></span>
       </el-menu-item>
     </el-menu>
   </el-container>
@@ -40,28 +40,16 @@
             };
         },
         methods: {
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            collapse(key){
-                this.isCollapse=key;
-            },
-          jumptocardmana() {
-            this.$router.replace({path: '/cardmanager'});
+          handleOpen(key, keyPath) {
+            console.log(key, keyPath);
           },
-          jumptoindex() {
-            this.$router.replace({path: '/index'});
+          handleClose(key, keyPath) {
+            console.log(key, keyPath);
           },
-          jumptopersoninfo() {
-              this.$router.replace({path:'/personinfo'});
-          },
-            jumptotimeline(){
-                this.$router.replace({path:'/timeLine'});
-            }
+          collapse(key) {
+            this.isCollapse = key;
           }
+        }
     }
 </script>
 
