@@ -23,7 +23,7 @@
                 <el-divider></el-divider>
                   <span v-text="card.cardContent"></span>
                 <el-divider><i class="el-icon-sunny"></i></el-divider>
-                <el-image v-for="item in card.imageSrc" :src="item">
+                <el-image v-for="item in card.imageSrc" :key="item" :src="item">
                 </el-image>
               </div>
               <div>

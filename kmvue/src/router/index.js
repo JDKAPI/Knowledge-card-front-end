@@ -12,6 +12,8 @@ import TimeLine from "../components/timeLine/TimeLine";
 import Notice from "../components/notice/Notice";
 import Text from "../components/Text";
 import cardDetail from "../components/cardDetail/cardDetail";
+import Reviewcard from "../components/reviewCard/Reviewcard";
+import Register from "../components/Register";
 Vue.use(Router)
 
 export default new Router({
@@ -68,6 +70,16 @@ export default new Router({
       path: '/timeLine',
       name: 'TimeLine',
       component: TimeLine
+    },
+    {
+      path: '/reviewcard',
+      name: 'Reviewcard',
+      component: Reviewcard
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/cardDetail',

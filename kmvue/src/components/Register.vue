@@ -1,0 +1,133 @@
+
+<template>
+  <body id="poster">
+<el-form :model="rules" :rules="rules" ref="ruleForm"  label-position="left" label-width="100px" class="login-container">
+  <el-form-item   label="id" prop="name">
+    <el-input placeholder="请输入id" v-model="registerForm.id"></el-input>
+  </el-form-item>
+  <el-form-item   label="用户名" prop="name">
+    <el-input placeholder="请输入用户名" v-model="registerForm.usename"></el-input>
+  </el-form-item>
+  <el-form-item  label="密码" prop="password">
+    <el-input show-password placeholder="请输入密码" v-model="registerForm.password"></el-input>
+  </el-form-item>
+  <el-form-item label="确认密码" prop="confirmpassword">
+    <el-input show-password placeholder="请再次输入密码"  v-model="registerForm.confirmpassword"></el-input>
+  </el-form-item>
+  <el-form-item  label="邮箱" prop="email">
+    <el-input placeholder="请输入email" v-model="registerForm.email"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-row>
+      <el-button onclick="window.location.href = 'http://localhost:8080/login'">返回登录</el-button>
+      <el-button type="primary"   v-on:click="register" >立即创建</el-button>
+    </el-row>
+  </el-form-item>
+</el-form>
+  </body>
+</template>
+<script>
+  export default {
+    name:'Register',
+    data() {
+      return {
+        registerForm: {
+          id:'',
+          usename: '',
+          password: '',
+          confirmpassword: '',
+          email: '',
+        },
+        rules: {
+          id:[
+            { required: true, message: '请输入id', trigger: 'blur' },
+          ],
+          name: [
+            { required: true, message: '请输入用户名', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          ],
+          password: [
+            { required: true, message: '请输入密码', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度6~8，不能有特殊字符如&|', trigger: 'blur' }
+          ],
+          confirmpassword: [
+            { required: true, message: '请再次输入密码', trigger: 'blur' }
+          ],
+          email: [
+            { required: true, message: '请输入邮箱', trigger: 'blur' }
+          ]
+        }
+      }
+    },
+    methods: {
+      open() {
+        this.$alert('修改成功', '', {
+          confirmButtonText: '确定',
+        });
+        window.location.reload();
+      },
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+
+      register () {
+        var that = this;
+        this.$axios
+          .post('/register', {
+            id:this.registerForm.id,
+            name: this.registerForm.usename,
+            token:'',
+            gmtCreate:'',
+            gmtModified:'',
+            mail: this.registerForm.email,
+            password: this.registerForm.password,
+            avatarUrl:'',
+
+          })
+          .then(function (res) {
+            console.log(res);
+             that.open();
+          })
+          .catch(function (errro) {
+
+          });
+      }
+    }
+  }
+</script>
+<style>
+  #poster {
+    background:url("../assets/two.gif") no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    position: fixed;
+  }
+  body{
+    margin: 0px;
+  }
+  .login-container {
+    border-radius: 15px;
+    background-clip: padding-box;
+    margin: 90px auto;
+    width: 350px;
+    padding: 35px 35px 15px 35px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 25px #cac6c6;
+  }
+  .login_title {
+    margin: 0px auto 40px auto;
+    text-align: center;
+    color: #505458;
+  }
+
+</style>

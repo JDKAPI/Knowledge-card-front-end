@@ -4,40 +4,20 @@
   <el-container>
     <el-aside style="width: 200px"><SideMenu></SideMenu></el-aside>
     <el-main>
-      <el-table
-        :data="tableData">
-        <el-table-column
-          prop="notifier"
-          label="发送者"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="cardName"
-          label="卡片名称"
-        width="180">
-        </el-table-column>
-        <el-table-column
-          prop="typeName"
-          label="类型"
-        width="180">
-        </el-table-column>
-          <el-table-column
-            prop="status"
-            label="是否已读" width="180">
-          </el-table-column>
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button
-              size="mini">查看详情</el-button>
-            <el-button
-              size="mini" @click="readed">标记已读</el-button>
-            <el-button
-              size="mini"
-              type="danger"
-             @click="handleDelete">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+      <div  v-for="item in tableData"
+            :key="item.id">
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <el-badge is-dot :hidden="panduan(item.status)" style="float:left;"> </el-badge>
+              <span style="float:left;">{{item.typeName}}</span>
+              <el-button icon="el-icon-right" style="float: right; border: none" @click="handleDelete(item.id)"></el-button>
+              <el-button  style="float: right; border: none" @click="readed(item.id)">已读</el-button>
+            </div>
+            <div>
+              <span style="float:left;">{{item.notifier}}{{item.typeName}}</span>
+            </div>
+          </el-card>
+      </div>
     </el-main>
   </el-container>
 </el-container>
@@ -52,6 +32,8 @@
       components: {SideMenu, NavMenu},
       data() {
         return {
+          idreaded:false,
+          currentDate: new Date(),
           tableData: []
         }
       },
@@ -59,20 +41,33 @@
         this.getdata();
       },
       methods: {
-        handleDelete() {
-          axios.get('delNotice', {params: {noticeId: 1}}).then(function (res) {
+        open() {
+          this.$message('已删除');
+        },
+        panduan(l) {
+          if(l===0){
+            return false;
+          }
+          else{
+            return true;
+          }
+        },
+        handleDelete(id) {
+          var that=this;
+          axios.get('delNotice', {params: {noticeId: id}}).then(function (res) {
             console.log(res);
+            that.open();
             window.location.reload();
           }).catch(function (error) {
             console.log(error);
           });
         },
-        readed() {
+        readed(id) {
           axios.get(
             'read',
             {
-              params: {
-                noticeId: 3
+                params: {
+                noticeId: id
               }
             }
           ).then(function (res) {
@@ -81,31 +76,41 @@
           }).catch(function (error) {
             console.log(error);
           });
-          getdata()
-          {
-            var that = this;
-            axios.get("getNotice",
-              {
-                params: {userId: 1}
-              })
-              .then(function (res) {
-                that.tableData = res.data.noticeList;
-                for (var i = 0; i < that.tableData.length; i++) {
-                  if (that.tableData[i].status === 1) {
-                    that.tableData[i].status = "已读";
-                  } else {
-                    that.tableData[i].status = "未读";
-                  }
-                }
-              }).catch(function (error) {
-              console.log(error);
-            });
-          }
+        },
+        getdata() {
+          var that = this;
+          axios.get("getNotice",
+            {
+              params: {userId: 1}
+            })
+            .then(function (res) {
+              console.log(res);
+              that.tableData = res.data.noticeList;
+            }).catch(function (error) {
+            console.log(error);
+          });
         }
       }
     }
 </script>
+<style>
 
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .box-card {
+    margin-left: 200px;
+    margin-top: 20px;
+    width: 680px;
+    height: 130px;
+  }
+</style>
 <style scoped>
 
 </style>
