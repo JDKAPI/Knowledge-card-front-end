@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import moment from 'moment'
 //import { Button, Select } from 'element-ui';
 //Vue.use(Button)
 //Vue.use(Select)
@@ -23,7 +22,7 @@ new Vue({
   components: { App },
   template: '<App/>'
 
-})
+}),
 Vue.prototype.format = function (te){
   if(te == ''){
     return '';

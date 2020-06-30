@@ -45,21 +45,20 @@
   import axios from 'axios'
   export default {
     name: 'Cards',
-    data () {
+    data() {
       return {
-        message:1516703495241,
         cover: 'https://i.loli.net/2019/04/10/5cada7e73d601.jpg',
         cards: [
           {
-            id:"1",
-            cardId:"2",
-            reviewTime:"3",
-            gmtCreate:"4",
-            gmtModified:"5",
-            reviewNum:"6",
-            userId:"7",
+            id: "1",
+            cardId: "2",
+            reviewTime: "3",
+            gmtCreate: "4",
+            gmtModified: "5",
+            reviewNum: "6",
+            userId: "7",
             cardName: "8",
-            creatorId:"id"
+            creatorId: "id"
           }
         ],
         showPrevious: false,
@@ -73,15 +72,14 @@
         ]
       }
     },
-  mounted() {
+    mounted() {
       this.init();
-  },
-    methods:{
-
-      trans:function (te) {
-        if(te === ''){
+    },
+    methods: {
+      trans: function (te) {
+        if (te === '') {
           return '';
-        }else if(te.length === 10){
+        } else if (te.length === 10) {
           var time = new Date(te * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
           var y = time.getFullYear();
           var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
@@ -91,7 +89,7 @@
           var s = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
           var timedate = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
           return timedate;
-        }else{
+        } else {
           var time = new Date(te);
           var y = time.getFullYear();
           var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
@@ -105,34 +103,34 @@
       },
       init() {
         var that = this;
-       axios.get('getcardlist',{
-         params:{page:1,userid:1},
-         headers:{}
-       }).then(
-         function (res) {
-            that.cards =res.data.paginationList.data;
-           for(var i=0;i<that.cards.length;i++){
-             that.cards[i].reviewTime=that.trans(that.cards[i].reviewTime);
-             that.cards[i].gmtCreate=that.trans(that.cards[i].gmtCreate);
-             that.cards[i].gmtModified=that.trans(that.cards[i].gmtModified);
-           }
-         }
-       )
-       .catch(error=>console.log(error));
+        axios.get('getcardlist', {
+          params: {page: 1, userid: 1},
+          headers: {}
+        }).then(
+          function (res) {
+            that.cards = res.data.paginationList.data;
+            for (var i = 0; i < that.cards.length; i++) {
+              that.cards[i].reviewTime = that.trans(that.cards[i].reviewTime);
+              that.cards[i].gmtCreate = that.trans(that.cards[i].gmtCreate);
+              that.cards[i].gmtModified = that.trans(that.cards[i].gmtModified);
+            }
+          }
+        )
+          .catch(error => console.log(error));
       },
-      delcard(item){
-        axios.get('delcard',{
-         params:{
-           userId:item.userId,
-           cardId:item.cardId,
-           creatorId:item.creatorId
-         }
-        },{})
-      .then(function () {
-       window.location.reload();
-      })
-          .catch(error=>console.log(error));
-      },
+      delcard(item) {
+        axios.get('delcard', {
+          params: {
+            userId: item.userId,
+            cardId: item.cardId,
+            creatorId: item.creatorId
+          }
+        }, {})
+          .then(function () {
+            window.location.reload();
+          })
+          .catch(error => console.log(error));
+      }
     }
   }
 </script>

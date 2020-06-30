@@ -48,59 +48,59 @@
     import SideMenu from "../common/SideMenu";
     import axios from "axios"
     export default {
-        name: "Notice",
+      name: "Notice",
       components: {SideMenu, NavMenu},
-      data(){
-          return{
-            tableData: []
-          }
+      data() {
+        return {
+          tableData: []
+        }
       },
       mounted() {
         this.getdata();
       },
-      methods:{
+      methods: {
         handleDelete() {
-          axios.get('delNotice',{params:{noticeId:1}}).then(function (res) {
-                    console.log(res);
+          axios.get('delNotice', {params: {noticeId: 1}}).then(function (res) {
+            console.log(res);
             window.location.reload();
           }).catch(function (error) {
-                    console.log(error);
+            console.log(error);
           });
         },
         readed() {
           axios.get(
             'read',
             {
-              params:{
-                noticeId:3
+              params: {
+                noticeId: 3
               }
             }
           ).then(function (res) {
-                console.log(res);
-                window.location.reload();
+            console.log(res);
+            window.location.reload();
           }).catch(function (error) {
-                  console.log(error);
+            console.log(error);
           });
-        },
-        getdata(){
-          var that = this;
-          axios.get("getNotice",
-            {
-              params:{userId:1}
-            })
-            .then(function (res) {
-                that.tableData=res.data.noticeList;
-              for (var i=0;i<that.tableData.length;i++){
-                if(that.tableData[i].status===1){
-                  that.tableData[i].status="已读";
+          getdata()
+          {
+            var that = this;
+            axios.get("getNotice",
+              {
+                params: {userId: 1}
+              })
+              .then(function (res) {
+                that.tableData = res.data.noticeList;
+                for (var i = 0; i < that.tableData.length; i++) {
+                  if (that.tableData[i].status === 1) {
+                    that.tableData[i].status = "已读";
+                  } else {
+                    that.tableData[i].status = "未读";
+                  }
                 }
-                else {
-                  that.tableData[i].status="未读";
-                }
-              }
-            }).catch(function (error) {
-                  console.log(error);
-          });
+              }).catch(function (error) {
+              console.log(error);
+            });
+          }
         }
       }
     }

@@ -38,7 +38,7 @@
                 select: '',
                 is_dot:false,
                 is_login:false,
-                avatarSrc:"https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg",
+                avatarSrc:'https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg',
                 userId:1
             }
         },
