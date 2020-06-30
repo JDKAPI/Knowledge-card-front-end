@@ -12,8 +12,12 @@ import TimeLine from "../components/timeLine/TimeLine";
 import Notice from "../components/notice/Notice";
 import Text from "../components/Text";
 import cardDetail from "../components/cardDetail/cardDetail";
+
+import CardEdit from "../components/cardEdit/CardEdit";
+
 import Reviewcard from "../components/reviewCard/Reviewcard";
 import Register from "../components/Register";
+
 Vue.use(Router)
 
 export default new Router({
@@ -86,5 +90,10 @@ export default new Router({
       name: 'CrdDetail',
       component: cardDetail
     },
+    {
+      path: '/cardEdit',
+      name: 'CardEdit',
+      component: CardEdit
+    }
   ]
 })

@@ -23,8 +23,9 @@
                     <el-divider><i class="el-icon-sunny"></i></el-divider>
                     <el-row>
                       <el-col :span="3">
-
-                        <i class="el-icon-edit icon-size" ></i>
+                        <router-link :to="{path: '/cardEdit',query: {cardId: activity.cardId}}" >
+                          <i class="el-icon-edit icon-size" ></i>
+                        </router-link>
                         <i class="iconfont icon-like icon-size" @click="upLikeNum(index)">
                           <span v-text="activity.likeNum"  style="font-size: 11px;" ></span>
                         </i>
