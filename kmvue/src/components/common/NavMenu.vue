@@ -27,6 +27,7 @@
 </template>
 
 <script>
+  import touxiang from "../../assets/头像默认.jpg"
     export default {
         name:'NavMenu',
         data() {
@@ -38,7 +39,7 @@
                 select: '',
                 is_dot:false,
                 is_login:false,
-                avatarSrc:'https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg',
+                avatarSrc:touxiang,
                 userId:1
             }
         },

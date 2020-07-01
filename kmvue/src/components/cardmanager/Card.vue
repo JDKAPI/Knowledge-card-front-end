@@ -35,24 +35,29 @@
           </div>
         </el-card>
       </el-tooltip>
-    </el-row>
-    <el-row>
-      <el-pagination
-        :current-page="1"
-        :page-size="10"
-        :total="20">
-      </el-pagination>
+      <el-row style="position: absolute;left: 400px;top:580px">
+        <el-pagination
+          id="xi"
+          @next-click="nextpage"
+          @prev-click="prevnext"
+          @current-change="changepage"
+          :current-page=currentPage
+          :page-size=1
+          :total=totalPage>
+        </el-pagination>
+      </el-row>
     </el-row>
   </div>
 </template>
 
 <script>
   import axios from 'axios'
+  import moren from "../../assets/知识卡片默认.png"
   export default {
     name: 'Cards',
     data() {
       return {
-        cover: 'https://i.loli.net/2019/04/10/5cada7e73d601.jpg',
+        cover: moren,
         cards: [
           {
             id: "1",
@@ -70,17 +75,27 @@
         showFirstPage: false,
         showNext: false,
         showEnd: false,
-        currentPage: "1",
-        totalPage: "1",
-        pages: [
-          1
-        ]
+        currentPage: 1,
+        totalPage: 20,
+        pages:[],
       }
     },
     mounted() {
       this.init();
     },
     methods: {
+      changepage(val){
+        this.currentPage=val;
+        this.init();
+      },
+    nextpage(){
+      this.currentPage++;
+      this.init();
+    },
+      prevnext(){
+        this.currentPage--;
+        this.init();
+      },
       trans: function (te) {
         if (te === '') {
           return '';
@@ -109,11 +124,18 @@
       init() {
         var that = this;
         axios.get('getcardlist', {
-          params: {page: 1, userid: 1},
+          params: {page: this.currentPage, userid: 1,size:12},
           headers: {}
         }).then(
           function (res) {
             that.cards = res.data.paginationList.data;
+            that.currentPage = res.data.paginationList.currentPage;
+            that.totalPage = res.data.paginationList.totalPage;
+            that.pages=res.data.paginationList.pages;
+            that.showPrevious = res.data.paginationList.showPrevious;
+            that.showFirstPage = res.data.paginationList.showFirstPage;
+            that.showNext = res.data.paginationList.showNext;
+            that.showEnd = res.data.paginationList.showEnd;
             for (var i = 0; i < that.cards.length; i++) {
               that.cards[i].reviewTime = that.trans(that.cards[i].reviewTime);
               that.cards[i].gmtCreate = that.trans(that.cards[i].gmtCreate);
@@ -121,7 +143,9 @@
             }
           }
         )
-          .catch(error => console.log(error));
+          .catch(function (error) {
+            console.log(error);
+          });
       },
       delcard(item) {
         axios.get('delcard', {
