@@ -6,9 +6,9 @@
         <el-main>
           <div style="width: max-content">
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-              <el-menu-item index="1" style="width: 300px" ><a  href="http://localhost:8080/personinfo" class="lianjie">个人信息</a></el-menu-item>
-              <el-menu-item index="2" style="width: 300px"><a href="http://localhost:8080/notice" class="lianjie">消息中心</a></el-menu-item>
-              <el-menu-item index="3" style="width: 300px"><a href="http://localhost:8080/cardmanager" class="lianjie">知识库</a></el-menu-item>
+              <el-menu-item index="1" style="width: 300px" ><a  href="/personinfo" class="lianjie">个人信息</a></el-menu-item>
+              <el-menu-item index="2" style="width: 300px"><a href="/notice" class="lianjie">消息中心</a></el-menu-item>
+              <el-menu-item index="3" style="width: 300px"><a href="/cardmanager" class="lianjie">知识库</a></el-menu-item>
             </el-menu>
             <h3 class="headline">个人资料</h3>
             <div >

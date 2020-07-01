@@ -7,23 +7,23 @@
       <el-menu-item index="1">
 
         <i class="el-icon-edit-outline"></i>
-        <span slot="title" ><a href="http://localhost:8080/index" style="text-decoration: none;font-size: 15px">返回首页</a></span>
+        <span slot="title" ><a href="/index" style="text-decoration: none;font-size: 15px">返回首页</a></span>
       </el-menu-item>
       <el-menu-item index="2">
         <i class="el-icon-s-claim"></i>
-        <span slot="title"><a href="http://localhost:8080/reviewcard" style="text-decoration: none;font-size: 15px">复习卡片</a></span>
+        <span slot="title"><a href="/reviewcard" style="text-decoration: none;font-size: 15px">复习卡片</a></span>
       </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-reading"></i>
-        <span slot="title" ><a href="http://localhost:8080/cardmanager" style="text-decoration: none;font-size: 15px">知识总览</a></span>
+        <span slot="title" ><a href="/cardmanager" style="text-decoration: none;font-size: 15px">知识总览</a></span>
       </el-menu-item>
       <el-menu-item index="4">
         <i class="el-icon-odometer"></i>
-        <span slot="title" ><a href="http://localhost:8080/timeLine" style="text-decoration: none;font-size: 15px">时间轴</a></span>
+        <span slot="title" ><a href="/timeLine" style="text-decoration: none;font-size: 15px">时间轴</a></span>
       </el-menu-item>
       <el-menu-item index="5">
         <i class="el-icon-house"></i>
-        <span slot="title" ><a href="http://localhost:8080/personinfo" style="text-decoration: none;font-size: 15px">个人信息</a></span>
+        <span slot="title" ><a href="/personinfo" style="text-decoration: none;font-size: 15px">个人信息</a></span>
       </el-menu-item>
     </el-menu>
   </el-container>
