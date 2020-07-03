@@ -17,6 +17,7 @@ import CardEdit from "../components/cardEdit/CardEdit";
 
 import Reviewcard from "../components/reviewCard/Reviewcard";
 import Register from "../components/Register";
+import TestReview from "../components/test/TestReview";
 
 Vue.use(Router)
 
@@ -94,6 +95,11 @@ export default new Router({
       path: '/cardEdit',
       name: 'CardEdit',
       component: CardEdit
+    },
+    {
+      path: '/test',
+      name: 'TestReview',
+      component: TestReview
     }
   ]
 })

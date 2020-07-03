@@ -142,7 +142,10 @@
                         console.log(res);
                         var num=res.data.likeNum;
                         console.log(res.likeNum);
-                        if(num!==-1){
+                        if(num==0){
+                            alert("您还未登录，不能点赞！");
+                        }
+                        else if(num!==-1){
                             that.activities[index].likeNum+=1;
                         }else {
                             that.activities[index].likeNum-=1;
