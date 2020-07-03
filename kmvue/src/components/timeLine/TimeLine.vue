@@ -3,11 +3,11 @@
     <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container>
       <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
-      <el-main>
+      <el-main style="z-index: 10">
         <div class="block">
           <link rel="stylesheet" href="//at.alicdn.com/t/font_1907822_2kqvxepkjap.css">
 
-          <el-timeline>
+          <el-timeline style="z-index: 10">
             <el-timeline-item
                               v-for="(activity, index) in activities"
                               :key="index"
@@ -21,7 +21,7 @@
                     <h4 v-text="activity.cardName"></h4>
                     <p v-text="activity.cardDescription"></p>
                     <el-divider><i class="el-icon-sunny"></i></el-divider>
-                    <el-row>
+                    <el-row style="z-index: 10">
                       <el-col :span="3">
                         <router-link :to="{path: '/cardEdit',query: {cardId: activity.cardId}}" >
                           <i class="el-icon-edit icon-size" ></i>

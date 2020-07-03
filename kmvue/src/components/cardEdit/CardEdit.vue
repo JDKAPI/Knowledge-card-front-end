@@ -42,7 +42,7 @@
             <div style="margin-top: 10px">
               <el-input
                 type="textarea"
-                :rows="8">
+                :rows="8" v-model="card.cardDescription">
               </el-input>
             </div>
           </el-col>

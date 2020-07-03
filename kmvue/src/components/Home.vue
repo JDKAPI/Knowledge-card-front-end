@@ -165,22 +165,11 @@
     }
 </script>
 <style>
-  /*html {*/
-  /*  height: 100%;*/
-  /*  background-image: -webkit-radial-gradient(ellipse farthest-corner at center top, #000d4d 0%, #000105 100%);*/
-  /*  background-image: radial-gradient(ellipse farthest-corner at center top, #000d4d 0%, #000105 100%);*/
-  /*}*/
-
-  /*body {*/
-  /*  width: 100%;*/
-  /*  margin: 0;*/
-  /*  overflow: hidden;*/
-  /*}*/
   .beijing {
     background-image: url("../assets/18.jpg");
     background-repeat: no-repeat;
     background-position: left top;
-    background-size: 1600px 1080px;
+    background-size: 100% 100%;
     z-index: -1;
   }
 
