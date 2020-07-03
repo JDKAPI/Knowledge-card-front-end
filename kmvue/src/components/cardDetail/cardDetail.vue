@@ -1,9 +1,9 @@
 <template>
-  <el-container>
-    <el-header><NavMenu></NavMenu></el-header>
+  <el-container >
+    <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container>
-      <el-aside style="width: 200px"><SideMenu></SideMenu></el-aside>
-      <el-main>
+      <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
+      <el-main  style="z-index: 10;">
         <link rel="stylesheet" href="//at.alicdn.com/t/font_1907822_2kqvxepkjap.css">
         <div>
           <span v-text="card.cardTitle" style="font-size: 60px;"></span>
@@ -27,7 +27,7 @@
                 </el-image>
               </div>
               <div>
-                <el-row>
+                <el-row  style="z-index: 10;">
                   <el-badge :value="card.commentNum" :max="99" class="badgeItem">
                   <el-button type="success" icon="el-icon-s-comment" circle></el-button>
                   </el-badge>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-    //import axios from 'axios'
+    import axios from 'axios'
     import NavMenu from "../common/NavMenu";
     import SideMenu from "../common/SideMenu";
     import Vue from 'vue';
@@ -90,7 +90,7 @@
                 var cardId = this.$route.query.cardId;
                 var that = this;
                 axios.get('showcard', {
-                    params: {userId: 1,
+                    params: {userId: NavMenu.data().userId,
                     cardId:cardId},
                     headers: {}
                 }).then(

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import touxiang from "../../assets/头像默认.jpg"
+  import img from "../../assets/头像默认.jpg"
     export default {
         name:'NavMenu',
         data() {
@@ -39,8 +39,8 @@
                 select: '',
                 is_dot:false,
                 is_login:false,
-                avatarSrc:touxiang,
-                userId:1
+                avatarSrc:img,
+                userId:2
             }
         },
         methods:{

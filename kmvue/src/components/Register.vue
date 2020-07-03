@@ -1,10 +1,7 @@
 
 <template>
-  <body id="poster">
+  <body id="poster" style="z-index: 10">
 <el-form :model="rules" :rules="rules" ref="ruleForm"  label-position="left" label-width="100px" class="login-container">
-  <el-form-item   label="id" prop="name">
-    <el-input placeholder="请输入id" v-model="registerForm.id"></el-input>
-  </el-form-item>
   <el-form-item   label="用户名" prop="name">
     <el-input placeholder="请输入用户名" v-model="registerForm.usename"></el-input>
   </el-form-item>
@@ -19,7 +16,7 @@
   </el-form-item>
   <el-form-item>
     <el-row>
-      <el-button onclick="window.location.href ="/login'">返回登录</el-button>
+      <el-button onclick="window.location.href ='/login'">返回登录</el-button>
       <el-button type="primary"   v-on:click="register" >立即创建</el-button>
     </el-row>
   </el-form-item>
@@ -39,9 +36,6 @@
           email: '',
         },
         rules: {
-          id:[
-            { required: true, message: '请输入id', trigger: 'blur' },
-          ],
           name: [
             { required: true, message: '请输入用户名', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
@@ -81,7 +75,7 @@
         var that = this;
         this.$axios
           .post('/register', {
-            id:this.registerForm.id,
+            // id:this.registerForm.id,
             name: this.registerForm.usename,
             token:'',
             gmtCreate:'',

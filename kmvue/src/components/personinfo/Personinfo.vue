@@ -1,9 +1,9 @@
 <template>
-    <el-container>
-      <el-header><NavMenu></NavMenu></el-header>
+    <el-container style="z-index: 10">
+      <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
       <el-container>
-        <el-aside style="width: 200px"><SideMenu></SideMenu></el-aside>
-        <el-main>
+        <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
+        <el-main style="z-index: 10">
           <div style="width: max-content">
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
               <el-menu-item index="1" style="width: 300px" ><a  href="/personinfo" class="lianjie">个人信息</a></el-menu-item>
@@ -11,20 +11,32 @@
               <el-menu-item index="3" style="width: 300px"><a href="/cardmanager" class="lianjie">知识库</a></el-menu-item>
             </el-menu>
             <h3 class="headline">个人资料</h3>
-            <div >
-              <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" class="headimg">
-            </div>
             <div>
-              <span class="title">ID: {{person.id}}</span>
+              <div >
+                <img src="person.avatarUrl" class="headimg">
+              </div>
+              <div>
+                <span class="title">ID: {{person.id}}</span>
+              </div>
+              <div class="personinfo">
+                <ul style="list-style-type: none;width: 1200px" >
+                    <li class="ali">姓名
+                      <span style="margin-left: 250px">{{person.name}}</span>
+                    </li>
+                  <hr>
+                  <li class="ali">邮箱
+                    <span style="margin-left: 250px">{{person.mail}}</span>
+                  </li> <hr>
+                  <li class="ali">创建时间
+                    <span style="margin-left: 210px">{{this.trans(person.gmtCreate)}}</span>
+                  </li> <hr>
+                  <li class="ali">修改时间
+                    <span style="margin-left: 210px">{{this.trans(person.gmtModified)}}</span>
+                  </li> <hr>
+                </ul>
+              </div>
             </div>
-           <div class="personinfo">
-             <ul style="list-style-type: none" >
-               <li class="ali">姓名 {{person.name}}</li>
-               <li class="ali">邮箱  {{person.mail}}</li>
-               <li class="ali">创建时间  {{person.gmtCreate}}</li>
-               <li class="ali">修改时间  {{person.gmtModified}}</li>
-             </ul>
-           </div>
+
             <div>
               <el-button  class="bianji" @click="dialogFormVisible=true">编辑</el-button>
               <el-dialog title="编辑个人信息" :visible.sync="dialogFormVisible">
@@ -107,10 +119,35 @@
             confirmButtonText: '确定',
           });
         },
+        trans: function (te) {
+          if (te === '') {
+            return '';
+          } else if (te.length === 10) {
+            var time = new Date(te * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+            var y = time.getFullYear();
+            var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
+            var d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+            var h = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
+            var mm = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
+            var s = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
+            var timedate = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
+            return timedate;
+          } else {
+            var time = new Date(te);
+            var y = time.getFullYear();
+            var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
+            var d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+            var h = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
+            var mm = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
+            var s = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
+            var timedate = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
+            return timedate;
+          }
+        },
         getinfo() {
           var that = this;
           axios.get('getUserInfo', {
-            params: {userId: 1}
+            params: {userId: NavMenu.data().userId}
           }).then(function (res) {
             console.log(res);
             that.person = res.data.userInfo;
@@ -122,7 +159,7 @@
           axios.post(
             'modifiedUserInfo',
           {
-            id:this.editperson.id,
+            id:2,//this.editperson.id,
             name:this.editperson.name,
             mail:this.editperson.mail,
             password:this.editperson.password,
@@ -159,6 +196,7 @@
   .headline{
     float:left;
     font-size: 20px;
+    text-align: left;
     height: 50px;
     width:1200px;
     line-height: 60px;

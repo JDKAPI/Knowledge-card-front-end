@@ -1,9 +1,9 @@
 <template>
-    <el-container>
-      <el-header><NavMenu></NavMenu></el-header>
+    <el-container style="background-color: #FFFFCC;z-index: 10">
+      <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
       <el-container>
-        <el-aside style="width: 200px"><SideMenu></SideMenu></el-aside>
-        <el-main>
+        <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
+        <el-main style="z-index: 10;">
           <Card ></Card>
         </el-main>
       </el-container>

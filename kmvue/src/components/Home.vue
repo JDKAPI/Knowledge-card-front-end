@@ -1,13 +1,13 @@
 <template>
-  <body>
-  <el-container >
-    <el-header ><NavMenu></NavMenu></el-header>
+  <body class="beijing" style="height: 700px">
+  <el-container>
+    <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container >
-      <el-aside  ><SideMenu></SideMenu></el-aside>
-      <el-main>
+      <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
+      <el-main style="margin-right: 200px;background-color: rgba(0, 0, 0, 0.5);z-index: 10">
         <el-row >
-          <el-col :span="13" :offset="2" > <div><el-input placeholder="请输入内容" v-model="card.headline"><template slot="prepend">标题</template></el-input></div></el-col>
-          <el-col :span="13" :offset="2">
+          <el-col :span="13" :offset="5" > <div><el-input placeholder="请输入内容" v-model="card.headline"><template slot="prepend">标题</template></el-input></div></el-col>
+          <el-col :span="13" :offset="5">
             <div style="margin-top: 10px">
               <el-switch
                 v-model="card.ispublic"
@@ -16,7 +16,7 @@
               </el-switch>
             </div>
           </el-col>
-          <el-col :span="13" :offset="2"> <div style="margin-top: 10px" >
+          <el-col :span="13" :offset="5"> <div style="margin-top: 10px" >
             <el-tag
               :key="tag"
               v-model="card.dynamicTags"
@@ -39,7 +39,17 @@
             <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
           </div></el-col>
 
-          <el-col :span="13" :offset="2">
+          <el-col :span="13" :offset="5">
+            <div style="margin-top: 10px">
+              <el-input
+                type="textarea"
+                :rows="8"
+                placeholder="请输入概述"
+                v-model="card.zhongdian">
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="13" :offset="5">
             <div style="margin-top: 10px">
               <el-input
                 type="textarea"
@@ -49,22 +59,12 @@
               </el-input>
             </div>
           </el-col>
-          <el-col :span="13" :offset="2">
-            <div style="margin-top: 10px">
-              <el-input
-                type="textarea"
-                :rows="8"
-                placeholder="请输入重点"
-                v-model="card.zhongdian">
-              </el-input>
-            </div>
-          </el-col>
-          <el-col :span="11">
+          <el-col :span="11" :offset="2">
             <div style="margin-top: 10px">
               <el-button type="primary" v-on:click="submit">提交</el-button>
             </div>
           </el-col>
-          <el-col  :span="1">
+          <el-col  :span="1" :offset="2">
             <div style="margin-top: 10px">
               <el-button type="primary">取消</el-button>
             </div>
@@ -79,9 +79,12 @@
 </template>
 
 <script>
+
   import NavMenu from './common/NavMenu'
   import SideMenu from './common/SideMenu'
-import axios from 'axios'
+  import {stars_nest} from "./stars_nest";
+  import {} from  "./canvas-nest"
+  import axios from 'axios'
   export default {
         name: "Home",
       data() {
@@ -105,7 +108,10 @@ import axios from 'axios'
           value: ''
         };
       },
-      methods: {
+    mounted() {
+          stars_nest()
+    },
+    methods: {
         open() {
           this.$message('提交成功');
         },
@@ -120,14 +126,14 @@ import axios from 'axios'
             var that= this;
             axios.post('addcard',
                       {
-                        creatorId:"1",
+                        creatorId:1,
                         isPublic: this.card.ispublic,
                         title: this.card.headline,
                         cardDescription:this.card.content,
-                        imgSrc: this.card.zhongdian,
+                        cardText:this.card.content,
+                        imgSrc: "111",
                         labelName:this.card.dynamicTags.toString(),
-                        userId:"1",
-                        cardText:"1"
+                        userId:NavMenu.data().userId,
                       },{}
           )
           .then(res => console.log(res))
@@ -159,6 +165,25 @@ import axios from 'axios'
     }
 </script>
 <style>
+  /*html {*/
+  /*  height: 100%;*/
+  /*  background-image: -webkit-radial-gradient(ellipse farthest-corner at center top, #000d4d 0%, #000105 100%);*/
+  /*  background-image: radial-gradient(ellipse farthest-corner at center top, #000d4d 0%, #000105 100%);*/
+  /*}*/
+
+  /*body {*/
+  /*  width: 100%;*/
+  /*  margin: 0;*/
+  /*  overflow: hidden;*/
+  /*}*/
+  .beijing {
+    background-image: url("../assets/18.jpg");
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 1600px 1080px;
+    z-index: -1;
+  }
+
   .el-select .el-input {
     width: 130px;
   }

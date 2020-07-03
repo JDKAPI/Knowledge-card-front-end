@@ -1,9 +1,9 @@
 <template>
-  <body id="poster">
+  <body id="poster" style="z-index: 10">
   <el-form class="login-container" label-position="left"
            label-width="0px">
     <h3 class="login_title">系统登录</h3>
-    <el-form-item>
+    <el-form-item >
       <el-input type="text" v-model="loginForm.username"
                 auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
@@ -78,6 +78,7 @@ import axios from 'axios'
     background: #fff;
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;
+    z-index: 10;
   }
   .login_title {
     margin: 0px auto 40px auto;

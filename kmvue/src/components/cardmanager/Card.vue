@@ -1,28 +1,33 @@
 <template>
-  <div >
+  <div>
     <el-row style="height: 840px;">
       <el-tooltip effect="dark" placement="right"
                   v-for="item in cards"
-                  :key="item.id">
+                  :key="item.id" style="z-index: 10">
         <p slot="content" style="width: 300px" class="abstract">{{"上次复习时间："+item.id}}</p>
         <p slot="content" style="font-size: 13px;margin-bottom: 6px">
           <span>{{"卡片创建时间："+item.gmtCreate}}</span>
         </p>
         <p slot="content" style="width: 300px" class="abstract">{{"id："+item.id}}</p>
         <p slot="content" style="width: 300px" class="abstract">{{"上次复习时间："+item.reviewTime}}</p>
+        <p slot="content" style="width: 300px" class="abstract">{{"最后复习时间："+item.lastReviewTime}}</p>
         <p slot="content" style="width: 300px" class="abstract">{{"复习次数："+item.reviewNum}}</p>
         <p slot="content" style="width: 300px" class="abstract">{{"上次修改时间："+item.gmtModified}}</p>
         <p slot="content" style="width: 300px" class="abstract">{{"卡片编号："+item.cardId}}</p>
-        <el-card style="width: 180px;margin-bottom: 20px;height: 270px;float: left;margin-right: 15px" class="book"
+        <el-card style="width: 230px;margin-bottom: 20px;height: 350px;float: left;margin-right: 15px; " class="card"
                  bodyStyle="padding:10px" shadow="hover">
-          <div class="cover">
-            <img :src="cover" alt="封面">
-          </div>
-          <div class="info">
+<!--          <div class="cover">-->
+<!--            <img :src="cover" alt="封面">-->
+<!--          </div>-->
+
+          <div style="margin-top: 40px">
             <div class="title">
               <span>{{item.cardName}}</span>
             </div>
-            <div style="margin-top: 15px">
+            <div class="content">
+              <p>{{item.cardDescription}}</p>
+            </div>
+            <div>
               <el-button icon="el-icon-delete" circle @click="delcard(item)"></el-button>
               <router-link :to="{path: '/cardEdit',query: {cardId: item.cardId}}">
                 <el-button icon="el-icon-edit" circle></el-button>
@@ -35,7 +40,7 @@
           </div>
         </el-card>
       </el-tooltip>
-      <el-row style="position: absolute;left: 400px;top:580px">
+      <el-row style=" position: absolute;left: 450px;top: 500px">
         <el-pagination
           id="xi"
           @next-click="nextpage"
@@ -60,15 +65,17 @@
         cover: moren,
         cards: [
           {
-            id: "1",
-            cardId: "2",
+            cardDescription:"",
+            id: 1,
+            cardId: 2,
             reviewTime: "3",
             gmtCreate: "4",
             gmtModified: "5",
-            reviewNum: "6",
+            reviewNum: 5,
+            lastReviewTime:"",
             userId: "7",
             cardName: "8",
-            creatorId: "id"
+            creatorId: 1,
           }
         ],
         showPrevious: false,
@@ -99,17 +106,19 @@
       trans: function (te) {
         if (te === '') {
           return '';
-        } else if (te.length === 10) {
-          var time = new Date(te * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-          var y = time.getFullYear();
-          var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
-          var d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
-          var h = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
-          var mm = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
-          var s = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
-          var timedate = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
-          return timedate;
-        } else {
+        }
+        // else if (te.length === 10) {
+        //   var time = new Date(te * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        //   var y = time.getFullYear();
+        //   var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
+        //   var d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+        //   var h = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
+        //   var mm = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
+        //   var s = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
+        //   var timedate = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
+        //   return timedate;
+        // }
+        else {
           var time = new Date(te);
           var y = time.getFullYear();
           var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
@@ -124,10 +133,11 @@
       init() {
         var that = this;
         axios.get('getcardlist', {
-          params: {page: this.currentPage, userid: 1,size:12},
+          params: {page: this.currentPage, userId: 2,size:5},
           headers: {}
         }).then(
           function (res) {
+            console.log(res);
             that.cards = res.data.paginationList.data;
             that.currentPage = res.data.paginationList.currentPage;
             that.totalPage = res.data.paginationList.totalPage;
@@ -140,6 +150,7 @@
               that.cards[i].reviewTime = that.trans(that.cards[i].reviewTime);
               that.cards[i].gmtCreate = that.trans(that.cards[i].gmtCreate);
               that.cards[i].gmtModified = that.trans(that.cards[i].gmtModified);
+              that.cards[i].lastReviewTime = that.trans(that.cards[i].lastReviewTime);
             }
           }
         )
@@ -165,9 +176,13 @@
 </script>
 
 <style scoped>
+  .card{
+    background-image: url("../../assets/cardback.png");
+    background-size: 100% 100%;
+  }
   .cover {
-    width: 164px;
-    height: 172px;
+    width: 210px;
+    height: 200px;
     margin-bottom: 7px;
     overflow: hidden;
     cursor: pointer;
@@ -180,18 +195,20 @@
   }
 
   .title {
-    font-size: 14px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 20px;
+    color: #FF0033;
     text-align: center;
   }
-
-  .author {
-    color: #333;
-    width: 102px;
-    font-size: 13px;
-    margin-bottom: 6px;
-    text-align: left;
-  }
-
+.content{
+  text-align: center;
+  margin-left: 22px;
+  width: 170px;
+  height: 190px;
+  font-size: 14px;
+  color: #3366FF;
+}
   .abstract {
     display: block;
     line-height: 17px;

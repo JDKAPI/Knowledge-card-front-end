@@ -1,8 +1,8 @@
 <template>
-<el-container>
-  <el-header><NavMenu></NavMenu></el-header>
+<el-container style="z-index: 10">
+  <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
   <el-container>
-    <el-aside style="width: 200px"><SideMenu></SideMenu></el-aside>
+    <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
     <el-main>
       <div  v-for="item in tableData"
             :key="item.id">
@@ -81,7 +81,7 @@
           var that = this;
           axios.get("getNotice",
             {
-              params: {userId: 1}
+              params: {userId: NavMenu.data().userId }
             })
             .then(function (res) {
               console.log(res);

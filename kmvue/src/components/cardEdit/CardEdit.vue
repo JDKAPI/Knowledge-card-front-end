@@ -1,10 +1,9 @@
 <template>
-  <body>
   <el-container >
-    <el-header ><NavMenu></NavMenu></el-header>
+    <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container >
-      <el-aside  ><SideMenu></SideMenu></el-aside>
-      <el-main>
+      <el-aside  style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
+      <el-main style="z-index: 10;">
         <el-row >
           <el-col :span="13" :offset="2" > <div><el-input :placeholder="card.title" v-model="card.title"><template slot="prepend">标题</template></el-input></div></el-col>
           <el-col :span="13" :offset="2">
@@ -44,8 +43,8 @@
               <el-input
                 type="textarea"
                 :rows="8"
-                placeholder="请输入内容"
-                v-model="card.cardText">
+                placeholder="请输入概述"
+                v-model="card.cardDescription">
               </el-input>
             </div>
           </el-col>
@@ -54,8 +53,8 @@
               <el-input
                 type="textarea"
                 :rows="8"
-                placeholder="请输入重点"
-                v-model="card.cardDescription">
+                placeholder="请输入内容"
+                v-model="card.cardText">
               </el-input>
             </div>
           </el-col>
@@ -75,7 +74,7 @@
     </el-container>
 
   </el-container>
-  </body>
+
 </template>
 
 <script>
@@ -152,7 +151,7 @@ import axios from 'axios'
                         cardDescription:this.card.cardDescription,
                           cardText:this.card.cardText,
                         labelName:this.card.labelName.toString(),
-                        userId:"1",
+                        userId:NavMenu.data().userId,
                         cardText:"1"
                       },{}
           )

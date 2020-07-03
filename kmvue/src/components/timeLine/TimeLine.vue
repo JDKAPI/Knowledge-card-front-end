@@ -1,8 +1,8 @@
 <template>
-  <el-container>
-    <el-header><NavMenu></NavMenu></el-header>
+  <el-container style="z-index: 10">
+    <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container>
-      <el-aside style="width: 200px"><SideMenu></SideMenu></el-aside>
+      <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
       <el-main>
         <div class="block">
           <link rel="stylesheet" href="//at.alicdn.com/t/font_1907822_2kqvxepkjap.css">
@@ -92,7 +92,7 @@
             init() {
                 var that = this;
                 axios.get('timeLine', {
-                    params: {userId: 1},
+                    params: {userId: NavMenu.data().userId },
                     headers: {}
                 }).then(
                     function (res) {
@@ -135,7 +135,7 @@
             upLikeNum(index){
                 var that=this;
                 axios.get('upLikeNum', {
-                    params: {userId: 1,cardId:that.activities[index].cardId},
+                    params: {userId: NavMenu.data().userId,cardId:that.activities[index].cardId},
                     headers: {}
                 }).then(
                     function (res) {
