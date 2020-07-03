@@ -129,7 +129,7 @@
                         creatorId:1,
                         isPublic: this.card.ispublic,
                         title: this.card.headline,
-                        cardDescription:this.card.content,
+                        cardDescription:this.card.zhongdian,
                         cardText:this.card.content,
                         imgSrc: "111",
                         labelName:this.card.dynamicTags.toString(),
