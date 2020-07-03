@@ -15,19 +15,16 @@
         </ul>
         </div>
         <el-row>
-          <el-col :span="16" :offset="4">
-            <el-card class="box-card">
-
-              <div>
-                  <span v-text="card.cardDescription"></span>
+          <el-col :span="16" :offset="4" >
+            <el-card class="box-card" style="margin: initial">
+                <span v-text="card.cardDescription" style="vertical-align: center"></span>
                 <el-divider></el-divider>
-                  <span v-text="card.cardText"></span>
+                  <span v-text="card.cardText" style="vertical-align: center"></span>
                 <el-divider><i class="el-icon-sunny"></i></el-divider>
                 <el-image v-for="item in card.imageSrc" :key="item" :src="item">
                 </el-image>
-              </div>
               <div>
-                <el-row  style="z-index: 10;">
+                <el-row style="margin-left: 45px" >
                   <el-badge :value="card.commentNum" :max="99" class="badgeItem">
                   <el-button type="success" icon="el-icon-s-comment" circle></el-button>
                   </el-badge>
@@ -37,11 +34,8 @@
                   <el-badge :value="card.likeNum" :max="99" class="badgeItem">
                     <el-button type="danger" icon="iconfont icon-like icon-size" circle @click="upLikeNum"></el-button>
                   </el-badge>
-
                 </el-row>
-
               </div>
-
             </el-card>
           </el-col>
         </el-row>

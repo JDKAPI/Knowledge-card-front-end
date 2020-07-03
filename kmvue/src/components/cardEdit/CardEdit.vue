@@ -42,9 +42,7 @@
             <div style="margin-top: 10px">
               <el-input
                 type="textarea"
-                :rows="8"
-                placeholder="请输入概述"
-                v-model="card.cardDescription">
+                :rows="8">
               </el-input>
             </div>
           </el-col>

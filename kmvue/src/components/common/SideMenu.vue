@@ -5,6 +5,7 @@
     <el-menu default-active="1-4-1" class="el-menu-vertical-demo"
              @open="handleOpen" @close="handleClose" :collapse="isCollapse" style="background-color: rgba(0, 0, 0, 0.4)">
       <el-menu-item index="1">
+
         <i class="el-icon-edit-outline"></i>
         <span slot="title" ><a href="/index" style="text-decoration: none;font-size: 15px;color: white">返回首页</a></span>
       </el-menu-item>
