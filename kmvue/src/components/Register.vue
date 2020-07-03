@@ -19,7 +19,7 @@
   </el-form-item>
   <el-form-item>
     <el-row>
-      <el-button onclick="window.location.href = 'http://localhost:8080/login'">返回登录</el-button>
+      <el-button onclick="window.location.href ="/login'">返回登录</el-button>
       <el-button type="primary"   v-on:click="register" >立即创建</el-button>
     </el-row>
   </el-form-item>

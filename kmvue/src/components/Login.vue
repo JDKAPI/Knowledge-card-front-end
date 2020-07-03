@@ -14,7 +14,7 @@
     <el-form-item style="width: 100%">
       <el-row>
         <el-button type="primary" v-on:click="Login">登录</el-button>
-        <el-button onclick="window.location.href = 'http://localhost:8080/register'">注册</el-button>
+        <el-button onclick="window.location.href = '/register'">注册</el-button>
         <el-button >忘记密码</el-button>
         </el-row>
     </el-form-item>

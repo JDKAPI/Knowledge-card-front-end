@@ -91,7 +91,7 @@ import axios from 'axios'
             ispublic: true,
             content:'',
             zhongdian:'',
-            dynamicTags: ['标签一', '标签二', '标签三'],
+            dynamicTags: [],
           },
           inputVisible: false,
           inputValue: '',
@@ -110,7 +110,7 @@ import axios from 'axios'
           this.$message('提交成功');
         },
           empty(){
-            this.card.dynamicTags=['标签一', '标签二', '标签三'],
+            this.card.dynamicTags=[],
               this.card.zhongdian="",
               this.card.content="",
               this.card.ispublic=true;
