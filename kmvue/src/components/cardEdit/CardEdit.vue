@@ -44,8 +44,8 @@
               <el-input
                 type="textarea"
                 :rows="8"
-                placeholder="请输入内容"
-                v-model="card.cardText">
+                placeholder="请输入重点"
+                v-model="card.cardDescription">
               </el-input>
             </div>
           </el-col>
@@ -54,8 +54,8 @@
               <el-input
                 type="textarea"
                 :rows="8"
-                placeholder="请输入重点"
-                v-model="card.cardDescription">
+                placeholder="请输入内容"
+                v-model="card.cardText">
               </el-input>
             </div>
           </el-col>
