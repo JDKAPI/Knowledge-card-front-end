@@ -1,12 +1,11 @@
 <template>
-<el-container style="z-index: 10">
+<el-container style="z-index: 10;background-color: #E0DEE3;height: 100%;width: 100%;position: fixed">
   <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
   <el-container>
     <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
-    <el-main>
-      <div  v-for="item in tableData"
-            :key="item.id">
-          <el-card class="box-card">
+    <el-main style="z-index: 10;">
+      <div  v-for="item in tableData" :key="item.id" style="z-index: 10;">
+          <el-card class="box-card" style="z-index: 10;">
             <div slot="header" class="clearfix">
               <el-badge is-dot :hidden="panduan(item.status)" style="float:left;"> </el-badge>
               <span style="float:left;">{{item.typeName}}</span>
