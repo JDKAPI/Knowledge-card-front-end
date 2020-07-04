@@ -24,14 +24,13 @@
 
 <script>
 import axios from 'axios'
-import globalvar from '../components/globalvar/globalvar'
     export default {
         name: 'Login',
         data () {
             return {
                 loginForm: {
-                    username: 'admin',
-                    password: '123'
+                    username: '1905263329@qq.com',
+                    password: '123456'
                 },
                 responseResult: []
             }
@@ -45,9 +44,8 @@ import globalvar from '../components/globalvar/globalvar'
                     userPassword: this.loginForm.password
                   }})
                     .then(function (res) {
-                        globalvar.setuserId(res.data.userid);
-                        console.log(res);
-                      console.log(globalvar.userId);
+                      var storage = window.sessionStorage;
+                      storage.setItem('userId',res.data.userid);
                        that.$router.replace({path: '/index'})
                       }
                     )

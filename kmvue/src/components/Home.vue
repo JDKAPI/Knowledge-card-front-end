@@ -89,6 +89,7 @@
         name: "Home",
       data() {
         return {
+          userId:'',
           card:{
             headline: '',
             ispublic: true,
@@ -109,9 +110,14 @@
         };
       },
     mounted() {
-          stars_nest()
+          this.getuserid();
+          stars_nest();
     },
     methods: {
+      getuserid(){
+        var temp = window.sessionStorage;
+        this.userId=temp.getItem('userId');
+      },
         open() {
           this.$message('提交成功');
         },
@@ -126,14 +132,14 @@
             var that= this;
             axios.post('addcard',
                       {
-                        creatorId:NavMenu.data().userId,
+                        creatorId:that.userId,
                         isPublic: this.card.ispublic,
                         title: this.card.headline,
                         cardDescription:this.card.zhongdian,
                         cardText:this.card.content,
                         imgSrc: "111",
                         labelName:this.card.dynamicTags.toString(),
-                        userId:NavMenu.data().userId,
+                        userId:that.userId,
                       },{}
           )
           .then(res => console.log(res))

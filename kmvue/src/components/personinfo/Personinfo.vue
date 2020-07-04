@@ -10,16 +10,12 @@
               <el-menu-item index="2" style="width: 300px"><a href="/notice" class="lianjie">消息中心</a></el-menu-item>
               <el-menu-item index="3" style="width: 300px"><a href="/cardmanager" class="lianjie">知识库</a></el-menu-item>
             </el-menu>
-            <h3 class="headline">个人资料</h3>
             <div>
               <div >
                 <img src="person.avatarUrl" class="headimg">
               </div>
-              <div>
-                <span class="title">ID: {{person.id}}</span>
-              </div>
-              <div class="personinfo">
-                <ul style="list-style-type: none;width: 1200px" >
+              <div style="margin-left: 130px;">
+                <ul style="list-style-type: none;width: 100%" >
                     <li class="ali">姓名
                       <span style="margin-left: 250px">{{person.name}}</span>
                     </li>
@@ -71,7 +67,6 @@
   import axios from 'axios'
   import NavMenu from "../common/NavMenu";
   import SideMenu from "../common/SideMenu";
-  import globalvar from "../globalvar/globalvar";
     export default {
       name: "Personinfo",
       components: {SideMenu, NavMenu},
@@ -103,9 +98,15 @@
         }
       },
       mounted() {
+        this.getuserid();
         this.getinfo();
+
       },
       methods: {
+        getuserid(){
+          var temp = window.sessionStorage;
+          this.userId=temp.getItem('userId');
+        },
         handleSelect(key, keyPath) {
           console.log(key, keyPath);
         },
@@ -150,7 +151,7 @@
         getinfo() {
           var that = this;
           axios.get('getUserInfo', {
-            params: {userId: globalvar.userid}
+            params: {userId: that.userId}
           }).then(function (res) {
             console.log(res);
             that.person = res.data.userInfo;
@@ -204,11 +205,6 @@
     width:1200px;
     line-height: 60px;
     border-bottom: 1px solid #e0e0e0;
-  }
-  .personinfo{
-    position: absolute;
-    left: 320px;
-    top: 280px;
   }
   .ali{
     margin-left: 1px;

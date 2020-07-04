@@ -55,6 +55,7 @@
         components: {SideMenu, NavMenu},
         data() {
             return {
+              userId:'',
                 card: {
                     cardTitle: 'Django 简介',
                     cardDescription: "Django 是一个由 Python 编写的一个开放源代码的 Web 应用框架。",
@@ -77,9 +78,14 @@
             }
         },
         mounted() {
+          this.getuserid();
             this.init();
         },
         methods: {
+          getuserid(){
+            var temp = window.sessionStorage;
+            this.userId=temp.getItem('userId');
+          },
             init() {
                 var cardId = this.$route.query.cardId;
                 var that = this;
@@ -100,7 +106,7 @@
                 var that=this;
                 var cardId = this.$route.query.cardId;
                 axios.get('upLikeNum', {
-                    params: {userId: NavMenu.data().userId,cardId:cardId},
+                    params: {userId: that.userId,cardId:cardId},
                     headers: {}
                 }).then(
                     function (res) {
@@ -118,7 +124,7 @@
                 var that=this;
                 var cardId = this.$route.query.cardId;
                 axios.get('upCollect', {
-                    params: {userId: NavMenu.data().userId,cardId:cardId},
+                    params: {userId: that.userId,cardId:cardId},
                     headers: {}
                 }).then(
                     function (res) {

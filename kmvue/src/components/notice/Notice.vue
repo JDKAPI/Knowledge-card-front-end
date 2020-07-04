@@ -32,15 +32,21 @@
       components: {SideMenu, NavMenu},
       data() {
         return {
+          userId:'',
           idreaded:false,
           currentDate: new Date(),
           tableData: []
         }
       },
       mounted() {
+        this.getuserid();
         this.getdata();
       },
       methods: {
+        getuserid(){
+          var temp = window.sessionStorage;
+          this.userId=temp.getItem('userId');
+        },
         open() {
           this.$message('已删除');
         },
@@ -81,7 +87,7 @@
           var that = this;
           axios.get("getNotice",
             {
-              params: {userId: NavMenu.data().userId }
+              params: {userId: that.userId }
             })
             .then(function (res) {
               console.log(res);

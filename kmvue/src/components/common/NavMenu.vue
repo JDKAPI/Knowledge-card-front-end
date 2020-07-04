@@ -30,7 +30,6 @@
 
 <script>
   import img from "../../assets/头像默认.jpg"
-  import globalvar from "../globalvar/globalvar";
     export default {
         name:'NavMenu',
         data() {
@@ -43,10 +42,13 @@
                 is_dot:false,
                 is_login:false,
                 avatarSrc:img,
-                userId: 1,//globalvar.userid,
+                userId: '',
             }
         },
-        methods:{
+      mounted() {
+      this.getuserid();
+          },
+      methods:{
             change(){
               if (this.select=='1'){
                   this.selectPlaceholder='在私有卡池搜索'
@@ -54,6 +56,10 @@
                   this.selectPlaceholder='在公有卡池搜索'
               }
             },
+          getuserid(){
+            var temp = window.sessionStorage;
+            this.userId=temp.getItem('userId');
+          },
           jumptonotice(){
               this.$router.replace({path:'/notice'});
           },

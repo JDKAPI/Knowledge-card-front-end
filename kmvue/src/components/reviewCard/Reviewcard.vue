@@ -6,23 +6,23 @@
          <SideMenu></SideMenu>
        </el-aside>
        <el-main style="z-index: 10">
-          <div style="margin-left: 200px;margin-right: 380px">
+          <div style="width: 85%;text-align: center;margin: inherit">
             <el-card class="box-card" shadow="hover">
               <div slot="header" class="clearfix" style="border-bottom: 1px solid #999999;margin-top: 20px">
                 <span>{{carddata[index].cardName}}</span>
               </div>
-              <div>
+              <div style="height: 330px">
               <p style="font-size: 15px;float:left;">{{carddata[index].cardDescription}}</p>
             </div>
-              <div style="position: absolute;top: 510px;left:430px;border-top:1px solid #999999;width: 700px;text-align: left;font-size: 20px;">
+              <div style="border-top:1px solid #999999;width: 100%;text-align: left;font-size: 20px;">
                 <span>上次复习时间:{{carddata[index].lastReviewTime}}</span>
                 <span>创建时间:{{carddata[index].gmtCreate}}<br></span>
                 <span>上次修改时间:{{carddata[index].gmtModified}}</span>
                 <span>复习时间:{{carddata[index].reviewTime}}</span>
               </div>
             </el-card>
-            <el-button style="font-size: 50px;float: left;background-color:  #C5C4A9" @click="tips">提示</el-button>
-            <el-button  style="font-size: 50px;float: right;background-color:  #C5C4A9" @click="yihui">已会</el-button>
+            <el-button style="font-size: 50px;background-color:  #C5C4A9;float: left" @click="tips">提示</el-button>
+            <el-button  style="font-size: 50px;background-color:  #C5C4A9;float: right" @click="yihui">已会</el-button>
           </div>
 
             <el-dialog title="详细信息" :visible.sync="dialogTableVisible">
@@ -43,6 +43,7 @@
       components: {SideMenu, NavMenu},
       data() {
         return {
+          userid:'',
           index: 0,
           card: {
             cardTitle: '',
@@ -73,9 +74,14 @@
         }
       },
       mounted() {
+        this.getuserid();
         this.getdata();
       },
       methods: {
+        getuserid(){
+          var temp = window.sessionStorage;
+          this.userid=temp.getItem('userId');
+        },
         tips() {
           var that = this;
           axios.get('showknowledgebase', {
@@ -147,7 +153,7 @@
           axios.get('review',
             {
               params: {
-                userId: NavMenu.data().userId
+                userId: that.userid
               }
             }
           ).then(function (res) {
@@ -169,7 +175,7 @@
           var that = this;
           axios.get('showcard', {
             params: {
-              userId: NavMenu.data().userId,
+              userId: that.userid,
               cardId: cardId
             },
             headers: {}

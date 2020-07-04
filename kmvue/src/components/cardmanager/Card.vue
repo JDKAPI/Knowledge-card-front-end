@@ -16,10 +16,6 @@
         <p slot="content" style="width: 300px" class="abstract">{{"卡片编号："+item.cardId}}</p>
         <el-card style="width: 230px;margin-bottom: 20px;height: 350px;float: left;margin-right: 15px; " class="card"
                  bodyStyle="padding:10px" shadow="hover">
-<!--          <div class="cover">-->
-<!--            <img :src="cover" alt="封面">-->
-<!--          </div>-->
-
           <div style="margin-top: 40px">
             <div class="title">
               <span>{{item.cardName}}</span>
@@ -57,13 +53,11 @@
 
 <script>
   import axios from 'axios'
-  import moren from "../../assets/知识卡片默认.png"
-  import NavMenu from "../common/NavMenu";
   export default {
     name: 'Cards',
     data() {
       return {
-        cover: moren,
+        userid:'',
         cards: [
           {
             cardDescription:"",
@@ -89,9 +83,14 @@
       }
     },
     mounted() {
+      this.getuserid();
       this.init();
     },
     methods: {
+      getuserid(){
+        var temp = window.sessionStorage;
+        this.userid=temp.getItem('userId');
+      },
       changepage(val){
         this.currentPage=val;
         this.init();
@@ -134,7 +133,7 @@
       init() {
         var that = this;
         axios.get('getcardlist', {
-          params: {page: this.currentPage, userId: NavMenu.data().userId,size:5},
+          params: {page: this.currentPage, userId: that.userid,size:5},
           headers: {}
         }).then(
           function (res) {
@@ -178,26 +177,13 @@
 
 <style scoped>
   .card{
-    background-image: url("../../assets/cardback.png");
+    background-image: url("../../assets/timg.png");
     background-size: 100% 100%;
   }
-  .cover {
-    width: 210px;
-    height: 200px;
-    margin-bottom: 7px;
-    overflow: hidden;
-    cursor: pointer;
-  }
-
-  img {
-    width: 115px;
-    height: 172px;
-    /*margin: 0 auto;*/
-  }
-
   .title {
     margin-left: 20px;
     margin-right: 20px;
+    height: 30px;
     font-size: 20px;
     color: #FF0033;
     text-align: center;

@@ -62,6 +62,7 @@
         components: {SideMenu, NavMenu},
         data() {
             return {
+              userId:'',
                 activities: [{
                     cardId: 37,
                     creatorId: 1,
@@ -86,13 +87,18 @@
             }
         },
         mounted() {
+          this.getuserid();
             this.init();
         },
         methods: {
+          getuserid(){
+            var temp = window.sessionStorage;
+            this.userId=temp.getItem('userId');
+          },
             init() {
                 var that = this;
                 axios.get('timeLine', {
-                    params: {userId: 2 },
+                    params: {userId: that.userId },
                     headers: {}
                 }).then(
                     function (res) {
@@ -111,7 +117,7 @@
                 }).then(() => {
                     axios.get('delcard', {
                         params: {
-                            userId: NavMenu.data().userId,
+                            userId: that.userId,
                             cardId: activity.cardId,
                             creatorId: activity.creatorId
                         }
@@ -135,7 +141,7 @@
             upLikeNum(index){
                 var that=this;
                 axios.get('upLikeNum', {
-                    params: {userId: NavMenu.data().userId,cardId:that.activities[index].cardId},
+                    params: {userId: that.userId,cardId:that.activities[index].cardId},
                     headers: {}
                 }).then(
                     function (res) {

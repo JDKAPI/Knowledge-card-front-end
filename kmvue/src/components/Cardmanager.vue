@@ -1,5 +1,5 @@
 <template>
-    <el-container style="background-color: #FFFFCC;z-index: 10">
+    <el-container style="background-color: #E0DEE3;z-index: 10;">
       <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
       <el-container>
         <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>

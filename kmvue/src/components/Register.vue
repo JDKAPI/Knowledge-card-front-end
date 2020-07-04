@@ -101,7 +101,6 @@
         var that = this;
         this.$axios
           .post('/register', {
-           // id:this.registerForm.id,
             name: this.registerForm.usename,
             token:'',
             gmtCreate:'',
@@ -109,7 +108,6 @@
             mail: this.registerForm.email,
             password: this.registerForm.password,
             avatarUrl:'',
-
           })
           .then(function (res) {
             console.log(res);
