@@ -83,7 +83,6 @@ import axios from 'axios'
         name: "CardEdit",
       data() {
         return {
-          userId:'',
           card:{
               title: 'Django 简介',
               cardDescription: "Django 是一个由 Python 编写的一个开放源代码的 Web 应用框架。",
@@ -108,14 +107,9 @@ import axios from 'axios'
         };
       },
       mounted() {
-          this.getuserid();
           this.init();
       },
       methods: {
-        getuserid(){
-          var temp = window.sessionStorage;
-          this.userId=temp.getItem('userId');
-        },
           init() {
               var cardId = this.$route.query.cardId;
               var that = this;
@@ -152,9 +146,10 @@ import axios from 'axios'
                         isPublic: this.card.isPublic,
                         title: this.card.title,
                         cardDescription:this.card.cardDescription,
-                        cardText:this.card.cardText,
+                          cardText:this.card.cardText,
                         labelName:this.card.labelName.toString(),
-                        userId:that.userId,
+                        creatorId:NavMenu.data().userId,
+                        cardText:"1"
                       },{}
           )
           .then(res => console.log(res))

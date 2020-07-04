@@ -66,6 +66,7 @@
             toSearch(){
                 var that=this;
                 this.$router.replace({path:'/searchDetail',query:{context:that.search}});
+                this.$router.go(0)
             },
         },
     }
