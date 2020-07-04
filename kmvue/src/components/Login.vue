@@ -46,7 +46,9 @@ import axios from 'axios'
                     .then(function (res) {
                        var storage = window.sessionStorage;
                       storage.setItem('userId',res.data.state);
-                       that.$router.replace({path: '/index'})
+                      that.$store.commit('login',res.data.state);
+                      var path = that.$route.query.redirect;
+                      that.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
                       }
                     )
                     .catch(function (error) {

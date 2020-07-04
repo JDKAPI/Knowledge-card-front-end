@@ -28,13 +28,18 @@ export default new Router({
       path:'/home',
       name:'Home',
       component:Home,
+      meta: {
+        requireAuth: true
+      },
       redirect:'/index',
-
       children:[
         {
           path: '/index',
           name: 'Appindex',
           component: Appindex,
+          meta: {
+            requireAuth: true
+          }
 
         },
       ],
@@ -49,6 +54,9 @@ export default new Router({
       path: '/text',
       name: 'Text',
       component: Text,
+      meta: {
+        requireAuth: true
+      }
 
     },
     {
@@ -56,13 +64,17 @@ export default new Router({
       path: '/personinfo',
       name: 'Personinfo',
       component: Personinfo,
-
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/notice',
       name: 'Notice',
       component: Notice,
-
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path:'/cardmanager',
@@ -72,51 +84,78 @@ export default new Router({
         {
           path:'/cards',
           name:'Card',
-          component:Card
+          component:Card,
+          meta: {
+            requireAuth: true
+          }
         }
       ],
+      meta: {
+        requireAuth: true
+      }
 
     },
     {
       path: '/timeLine',
       name: 'TimeLine',
       component: TimeLine,
+      meta: {
+        requireAuth: true
+      }
 
     },
     {
       path: '/reviewcard',
       name: 'Reviewcard',
       component: Reviewcard,
+      meta: {
+        requireAuth: true
+      }
 
     },
     {
       path: '/register',
       name: 'Register',
       component: Register,
+      meta: {
+        requireAuth: true
+      }
 
     },
     {
       path: '/cardDetail',
       name: 'CrdDetail',
       component: cardDetail,
+      meta: {
+        requireAuth: true
+      }
 
     },
     {
       path: '/cardEdit',
       name: 'CardEdit',
       component: CardEdit,
+      meta: {
+        requireAuth: true
+      }
 
     },
     {
       path: '/test',
       name: 'TestReview',
       component: TestReview,
+      meta: {
+        requireAuth: true
+      }
 
     },
     {
       path: '/searchDetail',
       name: 'SearchDetail',
       component: SearchDetail,
+      meta: {
+        requireAuth: true
+      }
 
     }
   ]
