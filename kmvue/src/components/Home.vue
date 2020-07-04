@@ -73,16 +73,13 @@
         </el-row>
       </el-main>
     </el-container>
-
   </el-container>
   </body>
 </template>
 
 <script>
-
   import NavMenu from './common/NavMenu'
   import SideMenu from './common/SideMenu'
-  import {stars_nest} from "./stars_nest";
   import {} from  "./canvas-nest"
   import axios from 'axios'
   export default {
@@ -111,7 +108,7 @@
       },
     mounted() {
           this.getuserid();
-          stars_nest();
+
     },
     methods: {
       getuserid(){

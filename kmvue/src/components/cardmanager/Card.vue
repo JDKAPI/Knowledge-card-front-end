@@ -1,54 +1,57 @@
 <template>
-  <div>
-    <el-row style="height: 840px;">
-      <el-tooltip effect="dark" placement="right"
-                  v-for="item in cards"
-                  :key="item.id" style="z-index: 10">
-        <p slot="content" style="width: 300px" class="abstract">{{"上次复习时间："+item.id}}</p>
-        <p slot="content" style="font-size: 13px;margin-bottom: 6px">
-          <span>{{"卡片创建时间："+item.gmtCreate}}</span>
-        </p>
-        <p slot="content" style="width: 300px" class="abstract">{{"id："+item.id}}</p>
-        <p slot="content" style="width: 300px" class="abstract">{{"上次复习时间："+item.reviewTime}}</p>
-        <p slot="content" style="width: 300px" class="abstract">{{"最后复习时间："+item.lastReviewTime}}</p>
-        <p slot="content" style="width: 300px" class="abstract">{{"复习次数："+item.reviewNum}}</p>
-        <p slot="content" style="width: 300px" class="abstract">{{"上次修改时间："+item.gmtModified}}</p>
-        <p slot="content" style="width: 300px" class="abstract">{{"卡片编号："+item.cardId}}</p>
-        <el-card style="width: 230px;margin-bottom: 20px;height: 350px;float: left;margin-right: 15px; " class="card"
-                 bodyStyle="padding:10px" shadow="hover">
-          <div style="margin-top: 40px">
-            <div class="title">
-              <span>{{item.cardName}}</span>
-            </div>
-            <div class="content">
-              <p>{{item.cardDescription}}</p>
-            </div>
-            <div>
-              <el-button icon="el-icon-delete" circle @click="delcard(item)"></el-button>
-              <router-link :to="{path: '/cardEdit',query: {cardId: item.cardId}}">
-                <el-button icon="el-icon-edit" circle></el-button>
-              </router-link>
+  <el-container style="background-color: #E0DEE3;height: 100%;width: 100%;position: fixed">
+    <div >
+      <el-row >
+        <el-tooltip effect="dark" placement="right"
+                    v-for="item in cards"
+                    :key="item.id" style="z-index: 10">
+          <p slot="content" style="width: 300px" class="abstract">{{"上次复习时间："+item.id}}</p>
+          <p slot="content" style="font-size: 13px;margin-bottom: 6px">
+            <span>{{"卡片创建时间："+item.gmtCreate}}</span>
+          </p>
+          <p slot="content" style="width: 300px" class="abstract">{{"id："+item.id}}</p>
+          <p slot="content" style="width: 300px" class="abstract">{{"上次复习时间："+item.reviewTime}}</p>
+          <p slot="content" style="width: 300px" class="abstract">{{"最后复习时间："+item.lastReviewTime}}</p>
+          <p slot="content" style="width: 300px" class="abstract">{{"复习次数："+item.reviewNum}}</p>
+          <p slot="content" style="width: 300px" class="abstract">{{"上次修改时间："+item.gmtModified}}</p>
+          <p slot="content" style="width: 300px" class="abstract">{{"卡片编号："+item.cardId}}</p>
+          <el-card style="width: 230px;margin-bottom: 20px;float: left;margin-right: 15px; " class="card"
+                   bodyStyle="padding:10px" shadow="hover">
+            <div style="margin-top: 40px">
+              <div class="title">
+                <span>{{item.cardName}}</span>
+              </div>
+              <div class="content">
+                <p>{{item.cardDescription}}</p>
+              </div>
+              <div>
+                <el-button icon="el-icon-delete" circle @click="delcard(item)"></el-button>
+                <router-link :to="{path: '/cardEdit',query: {cardId: item.cardId}}">
+                  <el-button icon="el-icon-edit" circle></el-button>
+                </router-link>
 
-              <router-link :to="{path: '/cardDetail',query: {cardId: item.cardId}}">
-                <el-button icon="el-icon-view" circle type="button"></el-button>
-              </router-link>
+                <router-link :to="{path: '/cardDetail',query: {cardId: item.cardId}}">
+                  <el-button icon="el-icon-view" circle type="button"></el-button>
+                </router-link>
+              </div>
             </div>
-          </div>
-        </el-card>
-      </el-tooltip>
-      <el-row style=" position: absolute;left: 450px;top: 500px">
-        <el-pagination
-          id="xi"
-          @next-click="nextpage"
-          @prev-click="prevnext"
-          @current-change="changepage"
-          :current-page=currentPage
-          :page-size=1
-          :total=totalPage>
-        </el-pagination>
+          </el-card>
+        </el-tooltip>
+        <el-row style=" position: absolute;left: 450px;top: 500px">
+          <el-pagination
+            id="xi"
+            @next-click="nextpage"
+            @prev-click="prevnext"
+            @current-change="changepage"
+            :current-page=currentPage
+            :page-size=1
+            :total=totalPage>
+          </el-pagination>
+        </el-row>
       </el-row>
-    </el-row>
-  </div>
+    </div>
+  </el-container>
+
 </template>
 
 <script>

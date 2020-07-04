@@ -1,5 +1,5 @@
 <template>
-    <el-container style="z-index: 10;background-color: #E0DEE3;height: 100%;width: 100%;position: fixed">
+    <el-container style="background-color: #E0DEE3;height: 100%;width: 100%;position: absolute">
       <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
       <el-container>
         <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
@@ -24,10 +24,10 @@
                     <span style="margin-left: 250px">{{person.mail}}</span>
                   </li> <hr>
                   <li class="ali">创建时间
-                    <span style="margin-left: 210px">{{this.trans(person.gmtCreate)}}</span>
+                    <span style="margin-left: 210px">{{this.trans(person.gmtModified)}}</span>
                   </li> <hr>
                   <li class="ali">修改时间
-                    <span style="margin-left: 210px">{{this.trans(person.gmtModified)}}</span>
+                    <span style="margin-left: 210px">{{this.trans(person.gmtCreate)}}</span>
                   </li> <hr>
                 </ul>
               </div>
@@ -72,7 +72,7 @@
       components: {SideMenu, NavMenu},
       data() {
         return {
-
+          userId:'',
           activeIndex: '1',
           person:
             {

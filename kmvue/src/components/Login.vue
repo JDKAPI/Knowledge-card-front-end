@@ -44,8 +44,8 @@ import axios from 'axios'
                     userPassword: this.loginForm.password
                   }})
                     .then(function (res) {
-                      var storage = window.sessionStorage;
-                      storage.setItem('userId',res.data.userid);
+                       var storage = window.sessionStorage;
+                      storage.setItem('userId',res.data.state);
                        that.$router.replace({path: '/index'})
                       }
                     )

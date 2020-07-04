@@ -1,47 +1,47 @@
 <template>
-<el-button @click="trans">diandiandian</el-button>
-</template>
+  <div id="baseReport" style="z-index: 1000;" >
+<!--    <remote-css href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap-grid.min.css"></remote-css>-->
+<!--    <remote-css href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap-reboot.css"></remote-css>-->
+<!--    <remote-css href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.css"></remote-css>-->
+    <remote-js src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.js"></remote-js>
+    <remote-js src=""></remote-js>
 
+  </div>
+</template>
 <script>
+
   export default {
+    components:{
+      'remote-css': {
+        render(createElement) {
+          return createElement('link', { attrs: { rel: 'stylesheet', href: this.href }});
+        },
+        props: {
+          href: { type: String, required: true },
+        },
+      },
+      'remote-js': {
+        render(createElement) {
+          return createElement('script', { attrs: { type: 'text/javascript', src: this.src }});
+        },
+        props: {
+          src: { type: String, required: true },
+        },
+      },
+    },
+    name: "baseReport",
     data() {
       return {
-        te: 1516703495241
-      };
+      }
+    },
+    mounted(){
+
     },
     methods:{
-      trans:function () {
-        if(this.te === ''){
-          console.log('');
-          return '';
-        }else if(this.te.length === 10){
-          var time = new Date(this.te * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-          var y = time.getFullYear();
-          var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
-          var d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
-          var h = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
-          var mm = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
-          var s = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
-          var timedate = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
-          console.log(timedate);
-          return timedate;
-        }else{
-          var time = new Date(this.te);
-          var y = time.getFullYear();
-          var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
-          var d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
-          var h = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
-          var mm = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
-          var s = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
-          var timedate = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
-          console.log(timedate);
-          return timedate;
-        }
-      }
+
     }
-  }
+  };
 </script>
 
 <style scoped>
-
 </style>

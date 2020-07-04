@@ -1,14 +1,14 @@
 <template>
-   <el-container style="z-index: 10;background-color: #C5C4A9">
+   <el-container style="background-color: #E0DEE3;height: 100%;width: 100%;position: absolute">
      <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
      <el-container>
        <el-aside style="width: 200px;z-index: 10">
          <SideMenu></SideMenu>
        </el-aside>
        <el-main style="z-index: 10">
-          <div style="width: 85%;text-align: center;margin: inherit">
-            <el-card class="box-card" shadow="hover">
-              <div slot="header" class="clearfix" style="border-bottom: 1px solid #999999;margin-top: 20px">
+          <div style="width: 50%;float: left">
+            <el-card    class="box-card"shadow="hover">
+              <div slot="header"  style="border-bottom: 1px solid #999999;margin-top: 20px">
                 <span>{{carddata[index].cardName}}</span>
               </div>
               <div style="height: 330px">
@@ -21,12 +21,12 @@
                 <span>复习时间:{{carddata[index].reviewTime}}</span>
               </div>
             </el-card>
-            <el-button style="font-size: 50px;background-color:  #C5C4A9;float: left" @click="tips">提示</el-button>
+            <el-button style="font-size: 50px;background-color:  #C5C4A9;float: right" @click="tips">提示</el-button>
             <el-button  style="font-size: 50px;background-color:  #C5C4A9;float: right" @click="yihui">已会</el-button>
           </div>
 
             <el-dialog title="详细信息" :visible.sync="dialogTableVisible">
-              <p style="font-size: 15px;float:left;">{{this.card.cardContent}}</p>
+              <p style="font-size: 15px;text-align: center">{{this.card.cardContent}}</p>
             </el-dialog>
 
        </el-main>
@@ -192,24 +192,11 @@
     }
 
 </script>
-<style>
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
-  }
 
-  .box-card {
-    width: 700px;
-    height: 480px;
-  }
-</style>
 <style scoped>
 
   .box-card {
+    height: 500px;
     width:100%;
     background-image: url("../../assets/reviewback.png");
     background-size: 100% 100%;
@@ -222,12 +209,4 @@
     margin: 0;
   }
 
-  .tou{
-    list-style-type: none;
-    color: #a6a9ad;
-  }
-  .badgeItem {
-    margin-top: 10px;
-    margin-right: 40px;
-  }
 </style>

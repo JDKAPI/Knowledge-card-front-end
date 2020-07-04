@@ -1,8 +1,8 @@
 <template>
-  <el-container style="z-index: 10;background-color: #E0DEE3;height: 100%;width: 100%;position: fixed">
+  <el-container style="background-color: #E0DEE3;height: 100%;width: 100%;position: absolute">
     <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container>
-      <el-aside style=" width: 200px"><SideMenu ></SideMenu></el-aside>
+      <el-aside style="z-index:10;width: 200px"><SideMenu ></SideMenu></el-aside>
       <el-main style="z-index: 10">
         <div class="block">
           <link rel="stylesheet" href="//at.alicdn.com/t/font_1907822_2kqvxepkjap.css">

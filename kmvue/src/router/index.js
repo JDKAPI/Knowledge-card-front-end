@@ -4,7 +4,6 @@ import Router from 'vue-router'
 import Appindex from "../components/home/Appindex";
 import Login from "../components/Login";
 import Home from "../components/Home";
-import SideMenu from "../components/common/SideMenu";
 import Cardmanager from "../components/Cardmanager";
 import Card from "../components/cardmanager/Card";
 import Personinfo from "../components/personinfo/Personinfo";
@@ -30,35 +29,40 @@ export default new Router({
       name:'Home',
       component:Home,
       redirect:'/index',
+
       children:[
         {
           path: '/index',
           name: 'Appindex',
-          component: Appindex
+          component: Appindex,
+
         },
-      ]
+      ],
     },
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
     },
     {
 
       path: '/text',
       name: 'Text',
-      component: Text
+      component: Text,
+
     },
     {
 
       path: '/personinfo',
       name: 'Personinfo',
-      component: Personinfo
+      component: Personinfo,
+
     },
     {
       path: '/notice',
       name: 'Notice',
-      component: Notice
+      component: Notice,
+
     },
     {
       path:'/cardmanager',
@@ -70,42 +74,50 @@ export default new Router({
           name:'Card',
           component:Card
         }
-      ]
+      ],
+
     },
     {
       path: '/timeLine',
       name: 'TimeLine',
-      component: TimeLine
+      component: TimeLine,
+
     },
     {
       path: '/reviewcard',
       name: 'Reviewcard',
-      component: Reviewcard
+      component: Reviewcard,
+
     },
     {
       path: '/register',
       name: 'Register',
-      component: Register
+      component: Register,
+
     },
     {
       path: '/cardDetail',
       name: 'CrdDetail',
-      component: cardDetail
+      component: cardDetail,
+
     },
     {
       path: '/cardEdit',
       name: 'CardEdit',
-      component: CardEdit
+      component: CardEdit,
+
     },
     {
       path: '/test',
       name: 'TestReview',
-      component: TestReview
+      component: TestReview,
+
     },
     {
       path: '/searchDetail',
       name: 'SearchDetail',
-      component: SearchDetail
+      component: SearchDetail,
+
     }
   ]
 })
