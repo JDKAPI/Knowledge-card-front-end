@@ -1,5 +1,5 @@
 <template>
-  <el-container >
+  <el-container>
     <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container>
       <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
@@ -172,6 +172,7 @@
 
   .box-card {
     width:100%;
+    height: auto;
   }
   .el-carousel__item h3 {
     color: #475669;
