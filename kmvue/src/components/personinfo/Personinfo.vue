@@ -191,6 +191,7 @@
        float: left;
         width: 100px;
        height: 100px;
+       border-radius: 150px;
      }
   .ali{
     margin-left: 1px;
