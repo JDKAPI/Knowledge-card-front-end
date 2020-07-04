@@ -26,7 +26,7 @@
           </div>
 
             <el-dialog title="详细信息" :visible.sync="dialogTableVisible">
-              <p style="font-size: 15px;float:left;">{{this.card.content}}</p>
+              <p style="font-size: 15px;float:left;">{{this.card.cardContent}}</p>
             </el-dialog>
 
        </el-main>
@@ -46,7 +46,6 @@
           index: 0,
           card: {
             cardTitle: '',
-            cardContent: "",
             cardContent: "",
             cardLable: [],
             creatorName: "",

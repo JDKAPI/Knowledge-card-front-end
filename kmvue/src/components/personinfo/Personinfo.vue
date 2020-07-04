@@ -71,6 +71,7 @@
   import axios from 'axios'
   import NavMenu from "../common/NavMenu";
   import SideMenu from "../common/SideMenu";
+  import globalvar from "../globalvar/globalvar";
     export default {
       name: "Personinfo",
       components: {SideMenu, NavMenu},
@@ -122,17 +123,19 @@
         trans: function (te) {
           if (te === '') {
             return '';
-          } else if (te.length === 10) {
-            var time = new Date(te * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-            var y = time.getFullYear();
-            var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
-            var d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
-            var h = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
-            var mm = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
-            var s = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
-            var timedate = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
-            return timedate;
-          } else {
+          }
+          // else if (te.length === 10) {
+          //   var time = new Date(te * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+          //   var y = time.getFullYear();
+          //   var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
+          //   var d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+          //   var h = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
+          //   var mm = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
+          //   var s = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
+          //   var timedate = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
+          //   return timedate;
+          // }
+          else {
             var time = new Date(te);
             var y = time.getFullYear();
             var m = time.getMonth() < 9 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
@@ -147,7 +150,7 @@
         getinfo() {
           var that = this;
           axios.get('getUserInfo', {
-            params: {userId: NavMenu.data().userId}
+            params: {userId: globalvar.userid}
           }).then(function (res) {
             console.log(res);
             that.person = res.data.userInfo;
@@ -159,7 +162,7 @@
           axios.post(
             'modifiedUserInfo',
           {
-            id:2,//this.editperson.id,
+            id:NavMenu.data().userId,
             name:this.editperson.name,
             mail:this.editperson.mail,
             password:this.editperson.password,

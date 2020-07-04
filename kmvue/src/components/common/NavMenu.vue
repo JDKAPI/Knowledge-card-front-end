@@ -28,6 +28,7 @@
 
 <script>
   import img from "../../assets/头像默认.jpg"
+  import globalvar from "../globalvar/globalvar";
     export default {
         name:'NavMenu',
         data() {
@@ -40,7 +41,7 @@
                 is_dot:false,
                 is_login:false,
                 avatarSrc:img,
-                userId:2
+                userId: 1,//globalvar.userid,
             }
         },
         methods:{

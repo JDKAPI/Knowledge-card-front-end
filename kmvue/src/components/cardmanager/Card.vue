@@ -58,6 +58,7 @@
 <script>
   import axios from 'axios'
   import moren from "../../assets/知识卡片默认.png"
+  import NavMenu from "../common/NavMenu";
   export default {
     name: 'Cards',
     data() {
@@ -133,7 +134,7 @@
       init() {
         var that = this;
         axios.get('getcardlist', {
-          params: {page: this.currentPage, userId: 2,size:5},
+          params: {page: this.currentPage, userId: NavMenu.data().userId,size:5},
           headers: {}
         }).then(
           function (res) {

@@ -24,6 +24,7 @@
 
 <script>
 import axios from 'axios'
+import globalvar from '../components/globalvar/globalvar'
     export default {
         name: 'Login',
         data () {
@@ -36,7 +37,6 @@ import axios from 'axios'
             }
         },
         methods: {
-
             Login () {
               var that = this;
                 axios.post('/login', {
@@ -45,8 +45,10 @@ import axios from 'axios'
                     userPassword: this.loginForm.password
                   }})
                     .then(function (res) {
-                        that.$router.replace({path: '/index'})
+                        globalvar.setuserId(res.data.userid);
                         console.log(res);
+                      console.log(globalvar.userId);
+                       that.$router.replace({path: '/index'})
                       }
                     )
                     .catch(function (error) {

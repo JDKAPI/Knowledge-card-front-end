@@ -126,7 +126,7 @@
             var that= this;
             axios.post('addcard',
                       {
-                        creatorId:1,
+                        creatorId:NavMenu.data().userId,
                         isPublic: this.card.ispublic,
                         title: this.card.headline,
                         cardDescription:this.card.zhongdian,
