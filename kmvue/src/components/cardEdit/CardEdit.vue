@@ -143,13 +143,12 @@ import axios from 'axios'
             axios.post('upCard',
                       {
                           id:cardId,
-                        creatorId:"1",
                         isPublic: this.card.isPublic,
                         title: this.card.title,
                         cardDescription:this.card.cardDescription,
                           cardText:this.card.cardText,
                         labelName:this.card.labelName.toString(),
-                        userId:NavMenu.data().userId,
+                        creatorId:NavMenu.data().userId,
                         cardText:"1"
                       },{}
           )

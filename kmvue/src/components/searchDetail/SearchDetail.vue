@@ -36,6 +36,9 @@
                 </el-col>
               </el-row>
             </div>
+            <div v-if="activities.length==0" class="noData">
+              <span>抱歉，没有您搜索的结果</span>
+            </div>
           </el-timeline>
         </div>
 
@@ -120,5 +123,11 @@
 </script>
 
 <style scoped>
-
+  .noData{
+    height: 500px;
+    font-size: 50px;
+    display: flex;
+    margin-left: 20%;
+    align-items: center;
+  }
 </style>
