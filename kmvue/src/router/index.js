@@ -117,10 +117,6 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register,
-      meta: {
-        requireAuth: true
-      }
-
     },
     {
       path: '/cardDetail',
