@@ -11,8 +11,8 @@
               <el-menu-item index="3" style="width: 300px"><a href="/cardmanager" class="lianjie">知识库</a></el-menu-item>
             </el-menu>
             <div>
-              <div >
-                <img src="person.avatarUrl" class="headimg">
+              <div>
+                <el-image :src="person.avatarUrl" class="headimg"></el-image>
               </div>
               <div style="margin-left: 130px;">
                 <ul style="list-style-type: none;width: 100%" >
@@ -88,7 +88,7 @@
           dialogTableVisible: false,
           dialogFormVisible: false,
           editperson: {
-            id: 1,
+            id: '',
             name: '',
             mail: '',
             password: '',
@@ -155,15 +155,17 @@
           }).then(function (res) {
             console.log(res);
             that.person = res.data.userInfo;
+            var temp = window.sessionStorage;
+            temp.setItem('headimg',that.person.avatarUrl);
           })
 
         },
         summitedit(){
-          var that =this
+          var that =this;
           axios.post(
             'modifiedUserInfo',
           {
-            id:NavMenu.data().userId,
+            id:that.userId,
             name:this.editperson.name,
             mail:this.editperson.mail,
             password:this.editperson.password,
@@ -190,22 +192,6 @@
         width: 100px;
        height: 100px;
      }
-  .title{
-    float: left;
-    font-size: 20px;
-    color: #999999;
-    margin-left: 30px;
-    margin-top: 9px;
-  }
-  .headline{
-    float:left;
-    font-size: 20px;
-    text-align: left;
-    height: 50px;
-    width:1200px;
-    line-height: 60px;
-    border-bottom: 1px solid #e0e0e0;
-  }
   .ali{
     margin-left: 1px;
     font-size: 20px;
