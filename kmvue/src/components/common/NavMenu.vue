@@ -6,12 +6,14 @@
           <h2 class="km-nav-head">知信</h2>
         </el-col>
         <el-col :span="8" :offset="1" style="margin-top: 10px">
-          <el-input :placeholder="selectPlaceholder" v-model="input3" class="input-with-select" >
+          <el-input :placeholder="selectPlaceholder" v-model="search" class="input-with-select" >
             <el-select v-model="select" slot="prepend" placeholder="请选择" @change="change">
               <el-option label="私有卡池" value="1" ></el-option>
               <el-option label="公共卡池" value="2"></el-option>
             </el-select>
-            <el-button slot="append" icon="el-icon-search" >搜索</el-button>
+
+              <el-button slot="append" icon="el-icon-search"  @click="toSearch()"> </el-button>
+
           </el-input>
         </el-col>
         <el-col :span="2" :offset="12">
@@ -36,7 +38,7 @@
                 selectPlaceholder:'请选择卡池，默认私有卡池',
                 input1: '',
                 input2: '',
-                input3: '',
+                search: '',
                 select: '',
                 is_dot:false,
                 is_login:false,
@@ -55,7 +57,11 @@
           jumptonotice(){
               this.$router.replace({path:'/notice'});
           },
-        }
+            toSearch(){
+                var that=this;
+                this.$router.replace({path:'/searchDetail',query:{context:that.search}});
+            },
+        },
     }
 </script>
 
