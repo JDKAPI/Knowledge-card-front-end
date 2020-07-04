@@ -40,6 +40,9 @@
           </el-col>
         </el-row>
       </el-main>
+      <div class="block"  style="width: 500px; height: 500px">
+        <el-image :src="card.wordCloud"></el-image>
+      </div>
     </el-container>
   </el-container>
 </template>
@@ -73,7 +76,8 @@
                     gmtModified: 1593261633875,
                     likeNum: 11,
                     commentNum:11,
-                    collectNum:11
+                    collectNum:11,
+                    wordCloud:""
                 } ,
             }
         },
@@ -96,6 +100,7 @@
                 }).then(
                     function (res) {
                         that.card = res.data;
+                        that.card.wordCloud = 'data:image/png;base64,' + that.card.wordCloud;
                         console.log(that.card);
                         that.creatorAvatarSrc = NavMenu.data().avatarSrc;
                     }
