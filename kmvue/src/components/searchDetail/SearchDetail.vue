@@ -23,7 +23,7 @@
                     <el-divider><i class="el-icon-sunny"></i></el-divider>
                     <el-row style="z-index: 10">
                       <el-col :span="3">
-                        <router-link :to="{path: '/cardDetail',query: {cardId: activity.cardId}}" >
+                        <router-link :to="{path: '/cardDetail',query: {cardId: activity.cardId,userId:activity.creatorId}}" >
                           <i class="el-icon-view  icon-size" ></i>
                         </router-link>
                       </el-col>
