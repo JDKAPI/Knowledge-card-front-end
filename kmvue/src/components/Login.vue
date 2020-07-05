@@ -29,8 +29,8 @@ import axios from 'axios'
         data () {
             return {
                 loginForm: {
-                    username: 'test@163.com',
-                    password: '123456'
+                    username: '',
+                    password: ''
                 },
                 responseResult: []
             }
