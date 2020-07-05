@@ -164,7 +164,8 @@
             console.log(res);
             that.person = res.data.userInfo;
             if(that.person.avatarUrl!==""){
-
+              var temp = window.sessionStorage;
+              temp.setItem('headimg',that.person.avatarUrl);
             }
             else{
               that.person.avatarUrl=img;
@@ -221,6 +222,7 @@
     position: absolute;
     left: 400px;
     top: 600px;
+    z-index: 100;
   }
   .lianjie{
     text-decoration: none;

@@ -55,6 +55,7 @@
     import axios from 'axios'
     import NavMenu from "../common/NavMenu";
     import SideMenu from "../common/SideMenu";
+    import img from '../../assets/头像默认.jpg'
     import Vue from 'vue';
     let vm = new Vue();
     export default {
@@ -101,7 +102,12 @@
           getuserid(){
             var temp = window.sessionStorage;
             this.userId=temp.getItem('userId');
-            this.timeAvatarSrc = temp.getItem('headimg');
+            if(temp.getItem('headimg')!==""){
+               this.timeAvatarSrc = temp.getItem('headimg')
+            }
+            else{
+              this.timeAvatarSrc=img;
+            }
           },
             init() {
                 var that = this;
