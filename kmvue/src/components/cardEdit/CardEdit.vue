@@ -1,5 +1,5 @@
 <template>
-  <el-container >
+  <el-container v-bind:style="{backgroundColor:colordata[index]}" class="main">
     <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container >
       <el-aside  style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
@@ -83,6 +83,8 @@ import axios from 'axios'
         name: "CardEdit",
       data() {
         return {
+          index:0,
+          colordata:['#FFFFCC','#FFFFFF','#E8E8E8'],
           userId:'',
           card:{
               title: 'Django 简介',
@@ -108,10 +110,15 @@ import axios from 'axios'
         };
       },
       mounted() {
+        this.initcolor();
           this.getuserid();
           this.init();
       },
       methods: {
+        initcolor(){
+          var temp = window.sessionStorage;
+          this.index=temp.getItem('backcolor');
+        },
         getuserid(){
           var temp = window.sessionStorage;
           this.userId=temp.getItem('userId');
@@ -194,6 +201,11 @@ import axios from 'axios'
   }
 </style>
 <style>
+  .main {
+    height: 100%;
+    width: 100%;
+    position: absolute
+  }
   .el-tag + .el-tag {
     margin-left: 10px;
   }

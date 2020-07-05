@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container v-bind:style="{backgroundColor:colordata[index]}" class="main">
     <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container>
       <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
@@ -55,6 +55,8 @@
         components: {SideMenu, NavMenu},
         data() {
             return {
+              index:0,
+              colordata:['#FFFFCC','#FFFFFF','#909090'],
               userId:'',
                 card: {
                     cardTitle: 'Django 简介',
@@ -77,11 +79,16 @@
                 } ,
             }
         },
-        mounted() {
+      mounted() {
+          this.initcolor();
           this.getuserid();
             this.init();
         },
         methods: {
+          initcolor(){
+            var temp = window.sessionStorage;
+            this.index=temp.getItem('backcolor');
+          },
           getuserid(){
             var temp = window.sessionStorage;
             this.userId=temp.getItem('userId');
@@ -164,7 +171,11 @@
 </script>
 
 <style scoped>
-
+  .main {
+    height: 100%;
+    width: 100%;
+    position: absolute
+  }
   .box-card {
     width:100%;
     height: auto;

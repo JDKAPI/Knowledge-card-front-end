@@ -1,5 +1,5 @@
 <template>
-  <el-container style="background-color: #E0DEE3;height: 100%;width: 100%;position: absolute">
+  <el-container v-bind:style="{backgroundColor:colordata[index]}" class="main">
     <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container>
       <el-aside style="z-index:10;width: 200px"><SideMenu ></SideMenu></el-aside>
@@ -62,6 +62,8 @@
         components: {SideMenu, NavMenu},
         data() {
             return {
+              index:0,
+              colordata:['#FFFFCC','#FFFFFF','#E8E8E8'],
               userId:'',
                 activities: [{
                     cardId: 37,
@@ -87,10 +89,15 @@
             }
         },
         mounted() {
+          this.initcolor();
           this.getuserid();
             this.init();
         },
         methods: {
+          initcolor(){
+            var temp = window.sessionStorage;
+            this.index=temp.getItem('backcolor');
+          },
           getuserid(){
             var temp = window.sessionStorage;
             this.userId=temp.getItem('userId');
@@ -186,7 +193,11 @@
 .icon-size{
   font-size: 20px;
 }
-
+.main {
+  height: 100%;
+  width: 100%;
+  position: absolute
+}
 a{
   color:black;
 }

@@ -11,12 +11,20 @@
               <el-option label="私有卡池" value="1" ></el-option>
               <el-option label="公共卡池" value="2"></el-option>
             </el-select>
-
               <el-button slot="append" icon="el-icon-search"  @click="toSearch()"> </el-button>
-
           </el-input>
         </el-col>
-        <el-col :span="2" :offset="12">
+        <el-col :span="3" :offset="1" style="margin-top: 10px">
+          <el-select v-model="value" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="2" :offset="8">
           <el-badge :is-dot="is_dot"style="float: left" class="item">
             <el-button icon="el-icon-message-solid" class="item-noti" @click="jumptonotice"></el-button>
           </el-badge>
@@ -34,6 +42,17 @@
         name:'NavMenu',
         data() {
             return {
+              options: [{
+                value: '1',
+                label: '米黄'
+              }, {
+                value: '2',
+                label: '纯白'
+              }, {
+                value: '3',
+                label: '灰'
+              }],
+              value: '',
                 selectPlaceholder:'请选择卡池，默认私有卡池',
                 input1: '',
                 input2: '',
@@ -48,7 +67,30 @@
       mounted() {
       this.getuserid();
           },
+      watch:{
+        value: function(val){
+            var tempcolor;
+              var temp = window.sessionStorage;
+              tempcolor =this.value;
+              if(tempcolor==='1'){
+                console.log('0');
+                temp.setItem('backcolor', 0);
+                window.location.reload();
+              }else if(tempcolor==='2'){
+                console.log('1');
+                temp.setItem('backcolor',1);
+                window.location.reload();
+              }
+              else{
+                console.log('2');
+                temp.setItem('backcolor',2);
+                window.location.reload();
+              }
+
+          }
+      },
       methods:{
+
             change(){
               if (this.select=='1'){
                   this.selectPlaceholder='在私有卡池搜索'

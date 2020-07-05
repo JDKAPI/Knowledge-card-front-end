@@ -1,5 +1,5 @@
 <template>
-  <el-container style="z-index: 10">
+  <el-container v-bind:style="{backgroundColor:colordata[index]}" class="main">
     <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
     <el-container>
       <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
@@ -58,6 +58,8 @@
         components: {SideMenu, NavMenu},
         data() {
             return {
+              index:0,
+              colordata:['#FFFFCC','#FFFFFF','#E8E8E8'],
                 activities: [{
                     cardId: 37,
                     creatorId: 1,
@@ -83,9 +85,14 @@
             }
         },
         mounted() {
+          this.initcolor();
             this.init();
         },
         methods: {
+          initcolor(){
+            var temp = window.sessionStorage;
+            this.index=temp.getItem('backcolor');
+          },
             init() {
                 var that = this;
                 var search = this.$route.query.context;
@@ -129,5 +136,9 @@
     display: flex;
     margin-left: 20%;
     align-items: center;
+  }
+  .main {
+    height: 100%;
+    width: 100%;
   }
 </style>

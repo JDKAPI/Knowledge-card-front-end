@@ -1,5 +1,5 @@
 <template>
-<el-container style="z-index: 10;background-color: #E0DEE3;height: 100%;width: 100%;position: fixed">
+<el-container v-bind:style="{backgroundColor:colordata[index]}" class="main">
   <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
   <el-container>
     <el-aside style="width: 200px;z-index: 10"><SideMenu></SideMenu></el-aside>
@@ -31,6 +31,8 @@
       components: {SideMenu, NavMenu},
       data() {
         return {
+          index:0,
+          colordata:['#FFFFCC','#FFFFFF','#E8E8E8'],
           userId:'',
           idreaded:false,
           currentDate: new Date(),
@@ -38,10 +40,15 @@
         }
       },
       mounted() {
+        this.initcolor();
         this.getuserid();
         this.getdata();
       },
       methods: {
+        initcolor(){
+          var temp = window.sessionStorage;
+          this.index=temp.getItem('backcolor');
+        },
         getuserid(){
           var temp = window.sessionStorage;
           this.userId=temp.getItem('userId');
@@ -99,7 +106,11 @@
     }
 </script>
 <style>
-
+  .main {
+    height: 100%;
+    width: 100%;
+    position: absolute
+  }
   .clearfix:before,
   .clearfix:after {
     display: table;

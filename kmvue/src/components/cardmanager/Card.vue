@@ -1,5 +1,5 @@
 <template>
-  <el-container style="background-color: #E0DEE3;height: 100%;width: 100%;position: fixed">
+  <el-container v-bind:style="{backgroundColor:colordata[index]}" class="main">
     <div >
       <el-row >
         <el-tooltip effect="dark" placement="right"
@@ -61,6 +61,8 @@
     data() {
       return {
         userid:'',
+        index:0,
+        colordata:['#FFFFCC','#FFFFFF','#E8E8E8'],
         cards: [
           {
             cardDescription:"",
@@ -86,10 +88,15 @@
       }
     },
     mounted() {
+      this.initcolor();
       this.getuserid();
       this.init();
     },
     methods: {
+      initcolor(){
+        var temp = window.sessionStorage;
+        this.index=temp.getItem('backcolor');
+      },
       getuserid(){
         var temp = window.sessionStorage;
         this.userid=temp.getItem('userId');
@@ -179,6 +186,11 @@
 </script>
 
 <style scoped>
+  .main{
+  height: 100%;
+    width: 100%;
+    position: absolute;
+  }
   .card{
     background-image: url("../../assets/timg.png");
     background-size: 100% 100%;

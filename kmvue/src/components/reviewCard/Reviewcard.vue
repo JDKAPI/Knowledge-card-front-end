@@ -1,5 +1,5 @@
 <template>
-   <el-container style="background-color: #E0DEE3;height: 100%;width: 100%;position: absolute">
+   <el-container v-bind:style="{backgroundColor:colordata[index1]}" class="main">
      <el-header style="z-index: 10;"><NavMenu></NavMenu></el-header>
      <el-container>
        <el-aside style="width: 200px;z-index: 10">
@@ -45,6 +45,8 @@
         return {
           userid:'',
           index: 0,
+          index1:0,
+          colordata:['#FFFFCC','#FFFFFF','#E8E8E8'],
           card: {
             cardTitle: '',
             cardContent: "",
@@ -74,10 +76,15 @@
         }
       },
       mounted() {
+        this.initcolor();
         this.getuserid();
         this.getdata();
       },
       methods: {
+        initcolor(){
+          var temp = window.sessionStorage;
+          this.index1=temp.getItem('backcolor');
+        },
         getuserid(){
           var temp = window.sessionStorage;
           this.userid=temp.getItem('userId');
@@ -194,7 +201,11 @@
 </script>
 
 <style scoped>
-
+  .main {
+    height: 100%;
+    width: 100%;
+    position: absolute
+  }
   .box-card {
     height: 500px;
     width:100%;
