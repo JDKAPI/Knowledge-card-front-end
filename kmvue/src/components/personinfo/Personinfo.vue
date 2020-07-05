@@ -67,6 +67,7 @@
   import axios from 'axios'
   import NavMenu from "../common/NavMenu";
   import SideMenu from "../common/SideMenu";
+  import img from "../../assets/头像默认.jpg"
     export default {
       name: "Personinfo",
       components: {SideMenu, NavMenu},
@@ -78,7 +79,7 @@
           activeIndex: '1',
           person:
             {
-              avatarUrl: "",
+              avatarUrl: img,
               gmtCreate: "",
               gmtModified: "",
               id: "",
@@ -162,8 +163,12 @@
           }).then(function (res) {
             console.log(res);
             that.person = res.data.userInfo;
-            var temp = window.sessionStorage;
-            temp.setItem('headimg',that.person.avatarUrl);
+            if(that.person.avatarUrl!==""){
+
+            }
+            else{
+              that.person.avatarUrl=img;
+            }
           })
 
         },
@@ -181,7 +186,8 @@
             {}
           ).then(
             function (res) {
-                 console.log(res);
+              var temp = window.sessionStorage;
+              temp.setItem('headimg',that.person.avatarUrl);
                  that.open();
               that.dialogFormVisible = false
             }

@@ -76,10 +76,10 @@
                     size: 'large',
                     type: 'primary',
                     icon: "",
-                    timeAvatarSrc: "https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg",
+                    timeAvatarSrc: "",
                     likeNum: 4,
                 }],
-                timeAvatarSrc: "https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg",
+                timeAvatarSrc: "",
             }
         },
         props: {
@@ -101,6 +101,7 @@
           getuserid(){
             var temp = window.sessionStorage;
             this.userId=temp.getItem('userId');
+            this.timeAvatarSrc = temp.getItem('headimg');
           },
             init() {
                 var that = this;
@@ -111,7 +112,6 @@
                     function (res) {
                         console.log(res);
                         that.activities = res.data.timeLineDTOList;
-                        that.timeAvatarSrc = NavMenu.data().avatarSrc;
                     }
                 )
                     .catch(error => console.log(error));

@@ -101,7 +101,12 @@
           getuserid(){
             var temp = window.sessionStorage;
             this.userId=temp.getItem('userId');
-            this.avatarSrc=temp.getItem('headimg');
+            if((temp.getItem('headimg'))!==""){
+              this.avatarSrc=temp.getItem('headimg');
+            }else{
+              this.avatarSrc=img;
+            }
+
           },
           jumptonotice(){
               this.$router.replace({path:'/notice'});

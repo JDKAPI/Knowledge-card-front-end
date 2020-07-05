@@ -14,6 +14,9 @@
     <el-form-item  label="邮箱" prop="email">
       <el-input placeholder="请输入email" v-model="registerForm.email"></el-input>
     </el-form-item>
+    <el-form-item  label="头像">
+      <el-input placeholder="请输入头像链接" v-model="registerForm.avatarUrl"></el-input>
+    </el-form-item>
     <el-form-item>
       <el-row>
         <el-button onclick="window.location.href ='/login'">返回登录</el-button>
@@ -57,7 +60,8 @@
           usename: '',
           password: '',
           confirmpassword: '',
-          email: ''
+          email: '',
+          avatarUrl:''
         },
         rules: {
           usename: [
@@ -106,10 +110,13 @@
             gmtModified:'',
             mail: this.registerForm.email,
             password: this.registerForm.password,
-            avatarUrl:'',
+            avatarUrl:this.registerForm.avatarUrl,
           })
           .then(function (res) {
             console.log(res);
+            var temp = window.sessionStorage;
+              temp.setItem('headimg',that.registerForm.avatarUrl);
+
             that.open();
           })
           .catch(function (errro) {

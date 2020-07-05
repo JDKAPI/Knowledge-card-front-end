@@ -75,7 +75,7 @@
                     type: 'primary',
                     icon: "",
                 }],
-                timeAvatarSrc: "https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg",
+                timeAvatarSrc: "",
             }
         },
         props: {
@@ -103,7 +103,6 @@
                     function (res) {
                         console.log(res);
                         that.activities = res.data.searchCards;
-                        that.timeAvatarSrc = NavMenu.data().avatarSrc;
                     }
                 )
                     .catch(error => console.log(error));
