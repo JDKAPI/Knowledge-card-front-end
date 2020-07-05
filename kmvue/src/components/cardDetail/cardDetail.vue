@@ -17,9 +17,9 @@
         <el-row>
           <el-col :span="16" :offset="4" >
             <el-card class="box-card" style="margin: initial">
-                <span v-text="card.cardDescription" style="vertical-align: center"></span>
+                <span v-text="card.cardDescription" style="vertical-align: center;word-wrap: break-word"></span>
                 <el-divider></el-divider>
-                  <span v-text="card.cardText" style="vertical-align: center"></span>
+                  <span v-text="card.cardText" style="vertical-align: center;word-wrap: break-word"></span>
                 <el-divider><i class="el-icon-sunny"></i></el-divider>
                 <el-image v-for="item in card.imageSrc" :key="item" :src="item">
                 </el-image>
@@ -60,23 +60,17 @@
             return {
               userId:'',
                 card: {
-                    cardTitle: 'Django 简介',
-                    cardDescription: "Django 是一个由 Python 编写的一个开放源代码的 Web 应用框架。",
-                    cardText: "使用 Django，只要很少的代码，Python 的程序开发人员就可以轻松地完成一个正式网站所需要" +
-                        "的大部分内容，并进一步开发出全功能的 Web 服务 Django 本身基于 MV" +
-                        "C 模型，即 Model（模型）+ View（视图）" +
-                        "+ Controller（控制器）设计模式，MVC 模式使后续对程序的修改和扩展简化，并且" +
-                        "使程序某一部分的重复利用成为可能。",
-                    imageSrc: ['https://www.runoob.com/wp-content/uploads/2020/05/1589777036-2760-fs1oSv4dOWAwC5yW.png',
-                        'https://www.runoob.com/wp-content/uploads/2020/05/MTV-Diagram.png'
-                    ],
+                    cardTitle: '',
+                    cardDescription: "",
+                    cardText: "",
+                    imageSrc: [],
                     labelName: ['标签一', '标签二', '标签三'],
-                    creatorAvatarSrc: "https://pic3.zhimg.com/80/v2-20b0180ba7944c669edf31bed2a055d3_720w.jpg",
-                    creatorName: "小明",
-                    gmtModified: 1593261633875,
-                    likeNum: 11,
-                    commentNum:11,
-                    collectNum:11,
+                    creatorAvatarSrc: "",
+                    creatorName: "",
+                    gmtModified: null,
+                    likeNum: null,
+                    commentNum:null,
+                    collectNum:null,
                     wordCloud:""
                 } ,
             }
@@ -100,9 +94,24 @@
                 }).then(
                     function (res) {
                         that.card = res.data;
-                        that.card.wordCloud = 'data:image/png;base64,' + that.card.wordCloud;
-                        console.log(that.card);
+                        that.card.wordCloud = 'data:image/png;base64,' + res.data.wordCloud;
                         that.creatorAvatarSrc = NavMenu.data().avatarSrc;
+                    }
+                )
+                    .catch(error => console.log(error));
+            },
+            getWordCloud() {
+                var cardId = this.$route.query.cardId;
+                var that = this;
+                axios.get('wordCloud', {
+                    params: {userId: NavMenu.data().userId,
+                        cardId:cardId},
+                    headers: {}
+                }).then(
+                    function (res) {
+                        var temp=res.data.wordCloud;
+                        that.card.wordCloud = 'data:image/png;base64,' + temp;
+                        console.log(that.card)
                     }
                 )
                     .catch(error => console.log(error));
