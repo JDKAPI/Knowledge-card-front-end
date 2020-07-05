@@ -37,7 +37,7 @@
             </div>
           </el-card>
         </el-tooltip>
-        <el-row style=" position: absolute;left: 450px;top: 450px">
+        <el-row style=" position: absolute;left: 500px;top: 450px;width: 100px">
           <el-select v-model="value" placeholder="请选择">
             <el-option
               v-for="item in options"

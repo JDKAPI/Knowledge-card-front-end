@@ -80,7 +80,23 @@
         this.getuserid();
         this.getdata();
       },
+      watch:{
+        index:function (val) {
+          console.log(this.index);
+            if((this.index)===this.carddata.length){
+              this.index=0;
+              this.open();
+            }
+        }
+      },
       methods: {
+        open() {
+          this.$notify({
+            title: '提示',
+            message: '今日复习完啦',
+            duration: 0
+          });
+        },
         initcolor(){
           var temp = window.sessionStorage;
           this.index1=temp.getItem('backcolor');
@@ -93,7 +109,7 @@
           var that = this;
           axios.get('showknowledgebase', {
             params: {
-              knowledgeBaseId: that.carddata[that.index].cardId,
+              knowledgeBaseId: that.carddata[that.index].id,
               state: 0,
             }
           }).then(function (res) {
@@ -109,17 +125,18 @@
             console.log(res)
             that.dialogTableVisible=true;
           }).catch(function (error) {
-
+                console.log(that.index);
           });
         },
         yihui() {
           var that = this;
           axios.get('showknowledgebase', {
             params: {
-              knowledgeBaseId: that.carddata[that.index].cardId,
+              knowledgeBaseId: that.carddata[that.index].id,
               state: 1,
             }
           }).then(function (res) {
+            that.carddata[that.index]="";
             that.index++;
             console.log(res)
           }).catch(
