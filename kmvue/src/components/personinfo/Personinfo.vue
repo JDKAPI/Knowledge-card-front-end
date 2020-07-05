@@ -44,7 +44,7 @@
                     <el-input v-model="editperson.mail" autocomplete="off"></el-input>
                   </el-form-item>
                   <el-form-item label="密码" :label-width="formLabelWidth">
-                    <el-input v-model="editperson.password" autocomplete="off"></el-input>
+                    <el-input show-password v-model="editperson.password" autocomplete="off"></el-input>
                   </el-form-item>
                   <el-form-item label="头像链接" :label-width="formLabelWidth">
                     <el-input v-model="editperson.avatarUrl" autocomplete="off"></el-input>
