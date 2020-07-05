@@ -15,7 +15,7 @@
           <p slot="content" style="width: 300px" class="abstract">{{"复习次数："+item.reviewNum}}</p>
           <p slot="content" style="width: 300px" class="abstract">{{"上次修改时间："+item.gmtModified}}</p>
           <p slot="content" style="width: 300px" class="abstract">{{"卡片编号："+item.cardId}}</p>
-          <el-card style="width: 230px;margin-bottom: 20px;float: left;margin-right: 15px; " class="card"
+          <el-card v-bind:style="{backgroundImage:'url(' + backimg[value] + ')'}" class="card"
                    bodyStyle="padding:10px" shadow="hover">
             <div style="margin-top: 40px">
               <div class="title">
@@ -37,6 +37,16 @@
             </div>
           </el-card>
         </el-tooltip>
+        <el-row style=" position: absolute;left: 450px;top: 450px">
+          <el-select v-model="value" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-row>
         <el-row style=" position: absolute;left: 450px;top: 500px">
           <el-pagination
             id="xi"
@@ -56,6 +66,9 @@
 
 <script>
   import axios from 'axios'
+  import img0 from '../../assets/timg.png'
+  import img1 from '../../assets/border1.jpg'
+  import img2 from '../../assets/cardback.png'
   export default {
     name: 'Cards',
     data() {
@@ -63,6 +76,7 @@
         userid:'',
         index:0,
         colordata:['#FFFFCC','#FFFFFF','#E8E8E8'],
+        backimg:[img0,img1,img2],
         cards: [
           {
             cardDescription:"",
@@ -85,6 +99,17 @@
         currentPage: 1,
         totalPage: 20,
         pages:[],
+        options: [{
+          value: 0,
+          label: '文艺'
+        }, {
+          value: 1,
+          label: '花'
+        }, {
+          value: 2,
+          label: '深色'
+        }, ],
+        value: 0
       }
     },
     mounted() {
@@ -192,8 +217,9 @@
     position: absolute;
   }
   .card{
-    background-image: url("../../assets/timg.png");
+
     background-size: 100% 100%;
+    width: 230px;margin-bottom: 20px;float: left;margin-right: 15px;
   }
   .title {
     margin-left: 20px;
