@@ -13,7 +13,10 @@
               <el-button  style="float: right; border: none" @click="readed(item.id)">已读</el-button>
             </div>
             <div>
-              <span style="float:left;">{{item.notifier}}{{item.typeName}}</span>
+              <span style="float:left;font-size: 25px">{{item.notifierName}}
+               <span style="margin-left: 15px;font-size: 20px">{{item.typeName}}</span>
+                <span style="margin-left: 15px;font-size: 20px">{{item.cardName}}</span>
+              </span>
             </div>
           </el-card>
       </div>

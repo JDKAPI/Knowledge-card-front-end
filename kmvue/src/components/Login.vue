@@ -29,7 +29,7 @@ import axios from 'axios'
         data () {
             return {
                 loginForm: {
-                    username: '1905263329@qq.com',
+                    username: 'test@163.com',
                     password: '123456'
                 },
                 responseResult: []
